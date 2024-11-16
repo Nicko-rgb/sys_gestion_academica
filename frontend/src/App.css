@@ -1,0 +1,23 @@
+* {
+  box-sizing: border-box;
+  font-family: 'poppins';
+  margin: 0;
+  font-family: 'poppins';
+}
+body {
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #242424;
+}
+.App {
+  box-sizing: border-box;
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  background-color: #242424;
+  color: white;
+}
+
+h1{
+  text-align: center;
+}
