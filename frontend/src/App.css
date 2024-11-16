@@ -7,15 +7,16 @@
 body {
   padding: 0;
   box-sizing: border-box;
-  background-color: #242424;
+  background-color: #f6feff;
+  position: relative;
 }
 .App {
   box-sizing: border-box;
   position: relative;
   height: 100vh;
   width: 100%;
-  background-color: #242424;
-  color: white;
+  background-color: #ffffff;
+  color: black;
 }
 
 h1{

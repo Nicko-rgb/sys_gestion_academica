@@ -1,0 +1,66 @@
+
+.sidebar {
+    position: fixed; 
+    top: 37px;
+    right: -260px; 
+    width: 250px;
+    height: calc(100vh - 74px); 
+    background-color: rgb(49, 49, 49); 
+    box-shadow: 0 0 5px black;
+    color: #FFFFFF;
+    padding: 20px;
+    transition: .3s ease; 
+    z-index: -100;
+}
+
+.sidebar.active {
+    right: 0; 
+}
+
+.ico-close {
+    cursor: pointer;
+    box-shadow: 0 0 2px white;
+    border-radius: 50%;
+    padding: 2px;
+    height: 35px;
+    width: 36px;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    cursor: pointer;
+    transition: .3s ease;
+}
+.sidebar .ico-close:hover{
+    background-color: rgb(66, 66, 66);
+    transform: scale(1.02);
+}
+.sidebar .title-page{
+    color: dodgerblue;
+    border-bottom: dodgerblue solid;
+    text-align: left;
+    font-size: 18px;
+    margin-top: 50px;
+}
+.sidebar .menu{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 10px;
+    padding-left: 18px;
+}
+.sidebar .menu .p{
+    padding: 5px 7px;
+    transition: .3s ease;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+}
+.sidebar .menu .p:hover{
+    background-color: rgb(76, 74, 74);
+    transform: scale(1.02);
+}
