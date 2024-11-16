@@ -1,0 +1,87 @@
+.nav-top, .nav-pie {
+    height: 37px;
+    background-color: rgb(49, 49, 49);
+    position: fixed;
+    width: 100%;
+    color: dodgerblue;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    z-index: 500;
+}
+.nav-top {
+    z-index: 500;
+    top: 0;
+    left: 0;
+    border-bottom: dodgerblue solid;
+}
+.nav-pie {
+    bottom: 0;
+    left: 0;
+    border-top: dodgerblue solid;
+}
+.nav-top .left, .right {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.nav-pie .left, .right {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.nav-top .left{
+    cursor: pointer;
+}
+.nav-top .name {
+    font-size: 14px;
+    color: white;
+}
+
+.nav-top .ico {
+    width: 32px;
+    height: 32px;
+    padding: 4px;
+    border-radius: 50%;
+    box-shadow: 0 0 1px, 0 0 1px;
+    transition: .3s ease;
+    cursor: pointer;
+}
+.nav-top .ico-1{
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.nav-top .ico-p {
+    color: rgb(29, 213, 29);
+}
+
+.nav-top .ico-m{
+    color: rgb(29, 213, 29);
+}
+.nav-top .ico:hover{
+    background-color: rgb(66, 66, 66);
+    box-shadow: 0 0 4px, 0 0 4px;
+}
+.nav-top .ico-1:hover{
+    box-shadow: none;
+    background-color: transparent;
+}
+
+.nav-pie p{
+    font-size: 12px;
+    color: white;
+}
+.nav-pie .right{
+    height: 100%;
+}
+.nav-pie .right button {
+    background-color: rgb(90, 89, 89);
+    color: white;
+    font-size: 15px;
+    height: 90%;
+    width: 160px;
+    margin-top: 1px;
+    box-shadow: 0 0 3px black;
+}
