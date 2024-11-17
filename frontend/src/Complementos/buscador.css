@@ -1,0 +1,29 @@
+
+.buscador {
+    max-width: 400px;
+    width: 100%;
+    position: relative;
+}
+.buscador input{
+    width: 100%;
+    padding: 3px;
+    padding-left: 30px;
+    font-size: 15px;
+    outline: none;
+    border: rgb(78, 175, 231) solid 1px;
+    color: rgb(75, 74, 74);
+}
+.buscador .ico {
+    position: absolute;
+    left: 5px;
+    top: 4px;
+    font-size: 22px;
+    color: gray;
+}
+.buscador input:focus {
+    border: dodgerblue solid 2px;
+}
+.buscador input:focus ~ .ico {
+    color: dodgerblue;
+    top: 5px;
+}
