@@ -11,7 +11,6 @@
     z-index: 500;
 }
 .nav-top {
-    z-index: 500;
     top: 0;
     left: 0;
     border-bottom: dodgerblue solid;
@@ -40,13 +39,16 @@
 }
 
 .nav-top .ico {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     padding: 4px;
     border-radius: 50%;
     box-shadow: 0 0 1px, 0 0 1px;
     transition: .3s ease;
     cursor: pointer;
+}
+.nav-top .sub-title-page {
+    font-size: 14px;
 }
 .nav-top .ico-1{
     border-radius: 0;
@@ -56,9 +58,14 @@
 .nav-top .ico-p {
     color: rgb(97, 208, 97);
 }
-
+.nav-top .ico-u {
+    color: white;
+}
 .nav-top .ico-m{
     color: rgb(97, 208, 97);
+}
+.nav-top .ico-o {
+    color: rgb(254, 76, 76);
 }
 .nav-top .ico:hover{
     background-color: rgb(66, 66, 66);
@@ -85,3 +92,4 @@
     margin-top: 1px;
     box-shadow: 0 0 3px black;
 }
+

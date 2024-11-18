@@ -1,0 +1,95 @@
+.login {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.login section {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.login .infor {
+    background-color: dodgerblue;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.login .infor h3 {
+    /* text-decoration: underline; */
+    color: white;
+    text-shadow: 0 0 5px blue, 0 0 5px blue, 0 0 5px blue;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.login .infor p {
+    font-weight: 900;
+    color: white;
+}
+
+.login .infor .suiza {
+    width: 80%;
+}
+
+.login .infor .minsa {
+    max-width: 400px;
+}
+/* .login .form-contend {
+    background-image: url('https://www.prasaga.com/wp-content/uploads/2022/11/PoW-Images_0002_PoW3-2400x1260.jpg');
+    background-size: cover;
+    background-position: center;
+} */
+.login section form {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    gap: 10px;
+    box-shadow: 0 0 10px dodgerblue;
+    padding: 20px;
+    max-width: 320px;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.login form h2 {
+    margin: 0;
+}
+
+.login section form label {
+    display: flex;
+    flex-direction: column;
+}
+
+.login form input {
+    padding: 7px;
+    outline: none;
+    font-size: 16px;
+    border: #37ae94 solid 1px;
+    border-radius: 4px;
+}
+.login form input:focus {
+    border: 2px dodgerblue solid;
+}
+
+.login form input::placeholder {
+    font-style: italic;
+    font-size: 14px;
+}
+.login form a {
+    text-align: center;
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+.login section form button {
+    margin-top: 5px;
+    background-color: #37ae94;
+    border-radius: 4px;
+    padding: 8px 0;
+}
+.login section form button:hover {
+    background-color: #278873;
+}
