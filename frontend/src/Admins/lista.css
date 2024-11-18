@@ -1,8 +1,12 @@
+.admins-list {
+    position: relative;
+}
 .admins-list main{
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    height: 100%;
 }
 .admins-list .container-table{
     display: flex;
@@ -63,7 +67,8 @@
     min-width: 700px;
 }
 .admins-list table th, td {
-    border: rgb(62, 152, 152) solid 1px;   
+    border: rgb(62, 152, 152) solid 1px;
+    text-transform: uppercase;
 }
 
 .admins-list table th {
@@ -74,7 +79,32 @@
     padding: 3px 5px;
 }
 .admins-list table td {
-    font-size: 13px;
-    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
     padding: 4px 5px;
+}
+.admins-list table .accion {
+    padding: 0;
+}
+.admins-list .accion div {
+    display: flex;
+}
+.admins-list table .ico{
+    font-size: 25px;
+    border-radius: 50%;
+    padding: 2px;
+    margin: auto;
+    /* border: solid 1px; */
+    cursor: pointer;
+}
+.admins-list table .ico:hover {
+    background-color: #ccc;
+}
+.admins-list .ico-edit{
+    color: dodgerblue;
+}
+.admins-list .ico-bloq {
+    color: rgb(255, 68, 68);
+}
+.admins-list .ico-acti{
+    color: green;
 }

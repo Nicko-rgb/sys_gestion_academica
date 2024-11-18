@@ -16,6 +16,9 @@ button {
     gap: 5px;
     padding: 5px 10px;
 }
+button:hover{
+    transform: scale(1.02);
+}
 
 /* Botón Guardar */
 .btn-save {
@@ -49,11 +52,18 @@ button {
 
 /* Botón Enviar/Confirmar */
 .btn-submit {
-    background-color: #007bff;
+    background-color: dodgerblue;
     color: #FFFFFF;
 }
 .btn-submit:hover {
     background-color: #0056b3; 
+}
+.msg-error {
+    color: rgb(255, 59, 59);
+    font-size: 14px;
+    text-align: center;
+    transition: .3s ease;
+    margin: 0;
 }
 
 
@@ -72,6 +82,10 @@ button {
     font-size: large;
     font-family: 'poppins';
     margin: 0;
-    font-size: 14.5px;
+    font-size: 16px;
     font-weight: bold;
+}
+
+.email{
+    text-transform: lowercase;
 }

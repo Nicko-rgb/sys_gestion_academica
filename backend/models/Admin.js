@@ -34,6 +34,11 @@ const Admins = sequelize.define('Admins', {
     password: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    estado: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: 'activo'
     }
 })
 

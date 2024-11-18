@@ -1,0 +1,29 @@
+.panel main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+.panel main div {
+    max-width: 600px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+.panel aside {
+    /* background-color: rgba(127, 255, 212, 0.474); */
+    /* background-color: #37ae946b; */
+    background-color: rgba(30, 143, 255, 0.331);
+    width: 45%;
+    height: 200px;
+    border-radius: 8px;
+    transition: .3s ease;
+    box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.395);
+}
+.panel aside:hover{
+    background-color: #37ae946b;
+    transform: scale(1.02);
+    box-shadow: 0 0 5px #37ae94;
+}
