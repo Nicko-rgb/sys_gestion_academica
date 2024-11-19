@@ -9,9 +9,9 @@
     background-color: rgba(0, 0, 0, 0.611);
     padding: 30px 10px;
     overflow-y: auto;
-    animation: fadeIn .5s ease;
 }
 .form-admin .form-container {
+    animation: fadeIn .5s ease;
     max-width: 500px;
     width: 100%;
     margin: auto;
@@ -27,7 +27,7 @@
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(-100px) scale(0.1);
+        transform: translateY(-200px) scale(0.1);
     }
 
     to {
@@ -74,12 +74,15 @@ h2 {
     flex-direction: column;
     width: 100%;
 }
-
+.form-admin form input{
+    font-size: 15px;
+}
 .form-admin form input, select {
     width: 100%;
-    padding: 10px;
+    padding: 9px;
     border-radius: 4px;
-    border: 1px solid #ccc;
+    border: 2px solid #ccc;
+    transition: .3s ease;
 }
 
 .form-admin form input:focus, select:focus {

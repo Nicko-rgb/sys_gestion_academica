@@ -1,9 +1,7 @@
 
 .buscador {
-    max-width: 400px;
-    width: 100%;
     position: relative;
-    
+    width: 430px;
 }
 .buscador input{
     width: 100%;

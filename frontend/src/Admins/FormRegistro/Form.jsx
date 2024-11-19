@@ -42,11 +42,32 @@ const Form = ({ close }) => {
         }
     };
 
+    const handleChangeDni = (dni) => {
+        const inputValue = dni.target.value;
+        // Expresión regular para permitir solo números
+        if (/^\d*$/.test(inputValue)) {
+            setFormData({ ...formData, dni: inputValue });
+        }
+    };
+
     return (
         <div className="form-admin">
             <div className="form-container">
                 <h2>Registro de Personal administrativo</h2>
                 <form onSubmit={handleSubmit}>
+                    <div className="form-group">
+                        <label>DNI:
+                            <input 
+                                type="text" 
+                                name="dni"
+                                value={formData.dni}
+                                onChange={handleChangeDni}
+                                maxLength={"8"}
+                                pattern='\d{8}'
+                                required
+                            />
+                        </label>
+                    </div>
                     <div className="form-group">
                         <label>Nombres:
                             <input
@@ -104,13 +125,12 @@ const Form = ({ close }) => {
                         </label>
                     </div>
                     <div className="form-group" id='pass'>
-                        <label>DNI:
+                        <label>Usuario (DNI):
                             <input
                                 type="text"
                                 name="dni"
                                 value={formData.dni}
-                                onChange={handleChange}
-                                required
+                                readOnly
                             />
                         </label>
                         <label>Contraseña:
