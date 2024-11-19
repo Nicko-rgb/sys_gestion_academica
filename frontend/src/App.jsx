@@ -9,16 +9,16 @@ import Perfil from './Admins/Perfil/Perfil';
 
 const App = () => {
 
-    useEffect(() => {
-        const elemenidVerificado = document.getElementById('id');
-        const txt = elemenidVerificado.innerText;
-        const txtValor = '© Copyrigth Derechos Reservados-2024 by Nixon'
+    // useEffect(() => {
+    //     const elemenidVerificado = document.getElementById('id');
+    //     const txt = elemenidVerificado.innerText;
+    //     const txtValor = '© Copyrigth Derechos Reservados-2024 by Nixon'
 
-        // Verificamos si el elemento y texto existen
-        if (!elemenidVerificado || txt !== txtValor) {
-            throw new Error('Elemento no encontrado'); 
-        } 
-    }, []);
+    //     // Verificamos si el elemento y texto existen
+    //     if (!elemenidVerificado || txt !== txtValor) {
+    //         throw new Error('Elemento no encontrado'); 
+    //     } 
+    // }, []);
 
     // const token = localStorage.getItem('token');
 
