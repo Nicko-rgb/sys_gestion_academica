@@ -85,15 +85,9 @@ button:hover{
     font-size: 16px;
     font-weight: bold;
 }
-
-.email{
-    text-transform: lowercase;
-}
 .volver-link {
     position: absolute;
     z-index: 2;
-    top: -35px;
-    left: -93px;
     font-size: 14px;
     height: 27px;
     font-weight: bold;
@@ -105,3 +99,62 @@ button:hover{
 .volver-link:hover {
     background-color: #37ae94e3;
 }
+
+/* STYLO DE TABLAS */
+table th {
+    font-size: 13px;
+    font-weight: 550;
+    /* background-color: rgb(108, 236, 153); */
+    background-color: #3fd7b6bd;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 3px 5px;
+}
+table td {
+    font-size: 12px;
+    padding: 4px 5px;
+    text-transform: uppercase;
+}
+table th, table td {
+    border: #00886b solid 1px;
+}
+
+/* STYLO DE FORMULARIO */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+form h2 {
+    text-align: center;
+}
+form .form-group {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+form label {
+    display: flex;
+    flex-direction: column;
+    font-size: 15px;
+    width: 100%;
+}
+
+form input, form select {
+    outline: none;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 15px;
+    transition: .3s ease;
+    text-transform: uppercase;
+}
+form select {
+    text-transform: capitalize;
+}
+form input:focus {
+    border-color: dodgerblue;
+}
+.email{
+    text-transform: none;
+}
+
