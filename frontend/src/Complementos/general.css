@@ -22,12 +22,12 @@ button:hover{
 
 /* Botón Guardar */
 .btn-save {
-    background-color: #28a745;
+    background-color: #37ae94;
     color: #FFFFFF; 
 }
 
 .btn-save:hover {
-    background-color: #218838;
+    background-color: #2b957e;
 }
 
 /* Botón Cancelar */
@@ -88,4 +88,20 @@ button:hover{
 
 .email{
     text-transform: lowercase;
+}
+.volver-link {
+    position: absolute;
+    z-index: 2;
+    top: -35px;
+    left: -93px;
+    font-size: 14px;
+    height: 27px;
+    font-weight: bold;
+    color: white;
+    background-color: dodgerblue;
+    background-color: rgba(30, 143, 255, 0.331);
+    background-color: #37ae94a5;
+}
+.volver-link:hover {
+    background-color: #37ae94e3;
 }

@@ -13,14 +13,38 @@ app.use(cors());
 app.use(express.json());
 
 // Sincroniza los modelos con la base de datos
+// Sincroniza los modelos con la base de datos
 db.sync({ alter: true })
-    .then(() => {
+    .then(async () => {
         console.log('Modelos sincronizados con la base de datos.');
+
+        // Verifica si existe un administrador por defecto
+        const defaultAdminDNI = 12345678; // Reemplaza con el DNI que prefieras
+        const defaultAdmin = await Admins.findOne({ where: { dni: defaultAdminDNI } });
+
+        if (!defaultAdmin) {
+            // Si no existe, crea el administrador por defecto
+            const hashedPassword = await bcrypt.hash('admin123', 10); // Reemplaza 'admin123' con tu contraseña por defecto
+            await Admins.create({
+                dni: defaultAdminDNI,
+                nombres: 'Admin',
+                apellidos: 'Default',
+                email: 'admin@example.com', // Reemplaza con tu correo por defecto
+                telefono: '123456789',
+                rol: 'superadmin', // Define un rol adecuado
+                password: hashedPassword,
+                estado: 'activo'
+            });
+            console.log('Administrador por defecto creado correctamente.');
+        } else {
+            console.log('Administrador por defecto ya existe.');
+        }
     })
     .catch(err => {
         console.error('Error al sincronizar los modelos:', err);
     });
 
+    
 //ruta para registrar un nuevo admin
 app.post('/api/register-admin', async (req, res) => {
     const { dni, nombres, apellidos, email, telefono, rol, password } = req.body;

@@ -1,11 +1,14 @@
 import React from 'react'
+import '../FormRegistro/form.css'
+import { IoCheckmarkDoneSharp } from "react-icons/io5";
+import { AiOutlineClose } from "react-icons/ai";
 
-const EditAdmin = ({admin} ) => {
+const EditAdmin = ({admin, close} ) => {
     return (
-        <div className='edit-adm'>
-            <div className="container">
-                <h3 className="title-page">EDITAR DATOS DE ADMIN</h3>
-                <form>
+        <div className='form-admin'>
+            <div className="form-container">
+                <h2>EDITAR DATOS DE ADMIN</h2>
+                <form id='id'>
                     <div className="form-group">
                         <label>Nombre:
                             <input type="text" />
@@ -32,8 +35,8 @@ const EditAdmin = ({admin} ) => {
                     </div>
 
                     <div className="form-group">
-                        <button type="button" onClick={close} className='btn-cancel'><AiOutlineClose />CANCELAR</button>
-                        <button type="submit" className="submit-button"><IoCheckmarkDoneSharp />Registrar</button>
+                        <button type="button" onClick={close} className='btn-cancel'><AiOutlineClose />Cancelar</button>
+                        <button type="submit" className="btn-save"><IoCheckmarkDoneSharp />Guardar</button>
                     </div>
 
                 </form>

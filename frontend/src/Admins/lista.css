@@ -15,18 +15,19 @@
     width: 100%;
 }
 .admins-list .acciones {
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 20px;
+    position: relative;
+    margin-top: 30px;
 }
 .admins-list .btn-reg {
     background-color: dodgerblue;
     color: white;
     font-size: 14px;
     position: absolute;
-    top: 85px;
+    top: 115px;
     z-index: 1;
     right: 20px;
     border-radius: 5px;
@@ -50,6 +51,9 @@
     border-radius: 0;
     cursor: pointer;
 }
+.admins-list .acciones .filtro:focus{
+    border: aquamarine solid 2px;
+}
 .admins-list .filtro option {
     border-radius: 0;
     cursor: pointer;
@@ -67,14 +71,16 @@
     min-width: 700px;
 }
 .admins-list table th, td {
-    border: rgb(62, 152, 152) solid 1px;
+    border: rgb(13, 107, 107) solid 1px;
     text-transform: uppercase;
 }
 
 .admins-list table th {
     font-size: 13px;
     font-weight: 550;
-    background-color: rgb(108, 236, 153);
+    /* background-color: rgb(108, 236, 153); */
+    background-color: #37ae94bd;
+
     text-align: left;
     padding: 3px 5px;
 }

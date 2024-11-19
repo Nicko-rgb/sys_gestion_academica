@@ -5,6 +5,7 @@ import NavPie from '../Navegador/NavPie';
 import Buscardor from '../Complementos/Buscardor';
 import Form from './FormRegistro/Form';
 import EditAdmin from './FormEdit/EditAdmin';
+import Volver from '../Navegador/Volver';
 import ModalConfir from '../Modals/ModalConfir';
 import { MdPersonAddAlt1 } from "react-icons/md";
 import { RiEdit2Line } from "react-icons/ri";
@@ -46,14 +47,14 @@ const ListaAdmin = () => {
 
     const handleForm = () => setOpenForm(!openForm);
 
-    const handleEdit = (admin) => {
-        setAdminSelect(admin);
-        setOpenEdit(!openEdit);
-    };
-
     const handleModalConfir = (admin) => {
         setAdminSelect(admin);
         setOpenConfir(!openConfir);
+    };
+
+    const handleEdit = (admin) => {
+        setAdminSelect(admin);
+        setOpenEdit(true);
     };
 
     // Función para inactivar al usuario seleccionado
@@ -117,6 +118,7 @@ const ListaAdmin = () => {
                 </button>
                 <div className="container-table">
                     <div className="acciones">
+                        <Volver />
                         <Buscardor onSearchChange={handleSearchChange} />
                         <select className="filtro" onChange={handleFilterChange}>
                             <option value="activo">Activos</option>
@@ -195,7 +197,10 @@ const ListaAdmin = () => {
             </main>
             {openForm && <Form close={handleForm} />}
             {openEdit && adminSelect && (
-                <EditAdmin close={() => setOpenEdit(false)} admin={adminSelect} />
+                <EditAdmin 
+                    close={() => setOpenEdit(false)} 
+                    admin={adminSelect} 
+                />
             )}
             {openConfir && adminSelect && (
                 <ModalConfir

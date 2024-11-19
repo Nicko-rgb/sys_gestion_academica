@@ -1,5 +1,6 @@
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
 import Login from './Login Form/Login';
 import './Complementos/general.css'
 import Panel from './Panel/Panel';
@@ -7,6 +8,17 @@ import ListaAdmin from './Admins/ListaAdmin';
 import Perfil from './Admins/Perfil/Perfil';
 
 const App = () => {
+
+    useEffect(() => {
+        const elemenidVerificado = document.getElementById('id');
+        const txt = elemenidVerificado.innerText;
+        const txtValor = '© Copyrigth Derechos Reservados-2024 by Nixon'
+
+        // Verificamos si el elemento y texto existen
+        if (!elemenidVerificado || txt !== txtValor) {
+            throw new Error('Elemento no encontrado'); 
+        } 
+    }, []);
 
     // const token = localStorage.getItem('token');
 
