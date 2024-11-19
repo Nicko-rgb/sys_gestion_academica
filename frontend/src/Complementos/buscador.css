@@ -1,26 +1,32 @@
 
 .buscador {
     position: relative;
-    width: 430px;
+    width: 450px;
 }
 .buscador input{
     width: 100%;
-    padding: 3px;
+    padding: 4px;
     padding-left: 30px;
     font-size: 15px;
     outline: none;
-    border: rgb(78, 175, 231) solid 1px;
+    border: rgba(30, 143, 255, 0.412) solid 2px;
+    /* border: none; */
     color: rgb(75, 74, 74);
+    box-shadow: 0 0 1px dodgerblue;
+}
+.buscador input::placeholder{
+    font-style: italic;
 }
 .buscador .ico {
     position: absolute;
     left: 5px;
-    top: 4px;
+    top: 5px;
     font-size: 22px;
     color: gray;
 }
 .buscador input:focus {
     border: dodgerblue solid 2px;
+    box-shadow: none;
 }
 .buscador input:focus ~ .ico {
     color: dodgerblue;

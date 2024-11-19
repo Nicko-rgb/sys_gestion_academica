@@ -5,6 +5,7 @@ require('dotenv').config();
 const cors = require('cors');
 const db = require('./db');
 const Admins = require('./models/Admin');
+const Postulantes = require('./models/Postulantes');
 
 const app = express();
 const PORT = process.env.PORT || 3005;
@@ -13,8 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 // Sincroniza los modelos con la base de datos
-// Sincroniza los modelos con la base de datos
-db.sync({ alter: true })
+db.sync({ alter: true }) // O { force: true } si quieres reiniciar la tabla
     .then(async () => {
         console.log('Modelos sincronizados con la base de datos.');
 
@@ -132,6 +132,31 @@ app.post('/api/login', async (req, res) => {
         res.status(500).json({ message: 'Error en el servidorr' });
     }
 });
+
+//ruta para registrar un postulante 
+app.post('/api/register-postulante', async (req, res) => {
+    const { nombres, apellidos, dni, fecha_nacimiento, email, telefono, colegio, direccion, carrera } = req.body;
+
+    try {
+        await Postulantes.create({
+            nombres,
+            apellidos,
+            dni,
+            fecha_naci: fecha_nacimiento, // Mapear correctamente
+            email,
+            telefono,
+            colegio_origen: colegio, // Mapear correctamente
+            direccion,
+            carrera_postulada: carrera // Mapear correctamente
+        });
+        res.json({ message: 'Postulante creado correctamente' });
+    } catch (error) {
+        console.error('Error al crear el postulante:', error);
+        res.status(500).json({ error: 'Error al crear el postulante.' });
+    }
+});
+
+
 
 
 // Iniciar el servidor

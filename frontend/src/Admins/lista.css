@@ -59,7 +59,10 @@
     cursor: pointer;
     background-color: white;
 }
-
+.admins-list .volver-link {
+    top: -35px;
+    left: -93px;
+}
 .admins-list .contador {
     margin-top: 10px;
     font-family: calibri;
@@ -70,7 +73,7 @@
     border-collapse: collapse;
     min-width: 700px;
 }
-.admins-list table th, td {
+.admins-list table th, .admins-list td {
     border: rgb(13, 107, 107) solid 1px;
     text-transform: uppercase;
 }
