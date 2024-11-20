@@ -13,27 +13,27 @@ const Panel = () => {
             <main>
                 <h5 className='title-page'>SISTEMA DE GESTION ACADÉMICA - IESTP SUIZA</h5>
                 <div>
-                    <Link>
+                    <Link className='aaa'>
                         <IoMdOpen  className='ico'/>
                         <p>ESTUDIANTES</p>
                         <button>Acción</button>
                     </Link>
-                    <Link>
+                    <Link className='aaa'>
                         <IoMdOpen  className='ico'/>
                         <p>CARRERAS</p>
                         <button>Acción</button>
                     </Link>
-                    <Link>
+                    <Link className='aaa'>
                         <IoMdOpen className='ico' />
                         <p>MATRICULAS</p>
                         <button>Acción</button>
                     </Link>
-                    <Link to='/admision'>
+                    <Link className='aaa' to='/admision'>
                         <IoMdOpen  className='ico'/>
                         <p>ADMISION</p>
                         <button>Acción</button>
                     </Link>
-                    <Link>
+                    <Link className='aaa'>
                         <IoMdOpen  className='ico'/>
                         <p>NOTAS DE ESTUDIANTES</p>
                         <button>Acción</button>
