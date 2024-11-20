@@ -11,6 +11,9 @@ const estudiantes = require('./models/Estudiantes');
 const Carreras = require('./models/carreras');
 const Periodos_Academicos = require('./models/Periodos');
 const Asignaturas = require('./models/Asignaturas')
+const Matriculas = require('./models/matricula')
+const PlanesEstudio = require('./models/planesdeEstudios')
+const Notas = require('./models/notas')
 const app = express();
 const PORT = process.env.PORT || 3005;
 
@@ -396,6 +399,126 @@ app.put('/api/asignaturas-update/:id', async (req, res) => {
         res.status(500).json({ error: 'Error al actualizar la asignatura.' });
     }
 });
+// GET: Obtener matrículas de un estudiante
+app.get('/api/matriculas/:id_estudiante', async (req, res) => {
+    const { id_estudiante } = req.params;
+    try {
+        const matriculas = await Matriculas.findAll({ where: { id_estudiante } });
+        res.status(200).json(matriculas);
+    } catch (err) {
+        res.status(500).json({ error: 'Error al obtener matrículas.' });
+    }
+});
+
+// POST: Crear nueva matrícula
+app.post('/api/matriculas', async (req, res) => {
+    const { id_estudiante, id_asignatura, periodo_academico, fecha_matricula, estado_matricula, tipo_matricula, observaciones } = req.body;
+    try {
+        await Matriculas.create({ id_estudiante, id_asignatura, periodo_academico, fecha_matricula, estado_matricula, tipo_matricula, observaciones });
+        res.json({ message: 'Matrícula creada correctamente' });
+    } catch (error) {
+        res.status(500).json({ error: 'Error al crear matrícula.' });
+    }
+});
+
+// PUT: Actualizar matrícula
+app.put('/api/matriculas/:id', async (req, res) => {
+    const { id } = req.params;
+    const { estado_matricula, tipo_matricula, observaciones } = req.body;
+    try {
+        const [updated] = await Matriculas.update(
+            { estado_matricula, tipo_matricula, observaciones },
+            { where: { id_matricula: id } }
+        );
+        if (updated) {
+            res.status(200).json({ message: 'Matrícula actualizada correctamente.' });
+        } else {
+            res.status(404).json({ error: 'Matrícula no encontrada.' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Error al actualizar matrícula.' });
+    }
+});
+// GET: Obtener planes de estudio
+app.get('/api/planes-estudio', async (req, res) => {
+    try {
+        const planes = await PlanesEstudio.findAll();
+        res.status(200).json(planes);
+    } catch (err) {
+        res.status(500).json({ error: 'Error al obtener planes de estudio.' });
+    }
+});
+
+// POST: Crear plan de estudio
+app.post('/api/planes-estudio', async (req, res) => {
+    const { nombre_plan, id_carrera, fecha_inicio, fecha_fin, descripcion } = req.body;
+    try {
+        await PlanesEstudio.create({ nombre_plan, id_carrera, fecha_inicio, fecha_fin, descripcion });
+        res.json({ message: 'Plan de estudio creado correctamente' });
+    } catch (error) {
+        res.status(500).json({ error: 'Error al crear plan de estudio.' });
+    }
+});
+
+// PUT: Actualizar plan de estudio
+app.put('/api/planes-estudio/:id', async (req, res) => {
+    const { id } = req.params;
+    const { nombre_plan, fecha_inicio, fecha_fin, descripcion } = req.body;
+    try {
+        const [updated] = await PlanesEstudio.update(
+            { nombre_plan, fecha_inicio, fecha_fin, descripcion },
+            { where: { id_plan: id } }
+        );
+        if (updated) {
+            res.status(200).json({ message: 'Plan de estudio actualizado correctamente.' });
+        } else {
+            res.status(404).json({ error: 'Plan de estudio no encontrado.' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Error al actualizar plan de estudio.' });
+    }
+});
+// GET: Obtener notas de un estudiante
+app.get('/api/notas/:id_estudiante', async (req, res) => {
+    const { id_estudiante } = req.params;
+    try {
+        const notas = await Notas.findAll({ where: { id_estudiante } });
+        res.status(200).json(notas);
+    } catch (err) {
+        res.status(500).json({ error: 'Error al obtener notas.' });
+    }
+});
+
+// POST: Crear nueva nota
+app.post('/api/notas', async (req, res) => {
+    const { id_estudiante, id_asignatura, nota, periodo_academico, fecha_emision, comentarios } = req.body;
+    try {
+        await Notas.create({ id_estudiante, id_asignatura, nota, periodo_academico, fecha_emision, comentarios });
+        res.json({ message: 'Nota creada correctamente' });
+    } catch (error) {
+        res.status(500).json({ error: 'Error al crear nota.' });
+    }
+});
+
+// PUT: Actualizar nota
+app.put('/api/notas/:id', async (req, res) => {
+    const { id } = req.params;
+    const { nota, comentarios } = req.body;
+    try {
+        const [updated] = await Notas.update(
+            { nota, comentarios },
+            { where: { id_nota: id } }
+        );
+        if (updated) {
+            res.status(200).json({ message: 'Nota actualizada correctamente.' });
+        } else {
+            res.status(404).json({ error: 'Nota no encontrada.' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Error al actualizar nota.' });
+    }
+});
+
 
 // Iniciar el servidor
 app.listen(PORT, () => {
