@@ -6,7 +6,11 @@ const cors = require('cors');
 const db = require('./db');
 const Admins = require('./models/Admin');
 const Postulantes = require('./models/Postulantes');
-
+const profesores = require('./models/Profesores');
+const estudiantes = require('./models/Estudiantes');
+const Carreras = require('./models/carreras');
+const Periodos_Academicos = require('./models/Periodos');
+const Asignaturas = require('./models/Asignaturas')
 const app = express();
 const PORT = process.env.PORT || 3005;
 
@@ -155,9 +159,243 @@ app.post('/api/register-postulante', async (req, res) => {
         res.status(500).json({ error: 'Error al crear el postulante.' });
     }
 });
+// Ruta para registrar un nuevo profesor (POST)
+app.post('/api/register-profesor', async (req, res) => {
+    const { nombres, apellidos, dni, email, telefono, carrera_asignada, rol } = req.body;
 
+    try {
+        const nuevoProfesor = await profesores.create({
+            nombres,
+            apellidos,
+            dni,
+            email,
+            telefono,
+            carrera_asignada,
+            rol
+        });
+        res.status(201).json({ message: 'Profesor creado correctamente', profesor: nuevoProfesor });
+    } catch (error) {
+        console.error('Error al crear el profesor:', error);
+        res.status(500).json({ error: 'Error al crear el profesor.' });
+    }
+});
 
+// Ruta para obtener todos los profesores (GET)
+app.get('/api/profesores-all', async (req, res) => {
+    try {
+        const profesores = await profesores.findAll();
+        res.status(200).json(profesores);
+    } catch (error) {
+        console.error('Error al obtener los profesores:', error);
+        res.status(500).json({ error: 'Error al obtener los profesores.' });
+    }
+});
 
+// Ruta para actualizar un profesor por ID (PUT)
+app.put('/api/profesores-update/:id', async (req, res) => {
+    const { id } = req.params; // ID del profesor a actualizar
+    const { nombres, apellidos, email, telefono, carrera_asignada, rol } = req.body; // Datos a actualizar
+
+    try {
+        const [updated] = await profesores.update(
+            { nombres, apellidos, email, telefono, carrera_asignada, rol }, // Datos nuevos
+            { where: { id_profesor: id } } // Condición para encontrar el registro
+        );
+
+        if (updated) {
+            res.status(200).json({ message: 'Profesor actualizado correctamente.' });
+        } else {
+            res.status(404).json({ error: 'Profesor no encontrado.' });
+        }
+    } catch (error) {
+        console.error('Error al actualizar el profesor:', error);
+        res.status(500).json({ error: 'Error al actualizar el profesor.' });
+    }
+});
+app.post('/api/register-estudiante', async (req, res) => {
+    const { nombres, apellidos, dni, fecha_nacimiento, email, telefono, direccion, carrera_id } = req.body;
+
+    try {
+        const nuevoEstudiante = await estudiantes.create({
+            nombres,
+            apellidos,
+            dni,
+            fecha_nacimiento,
+            email,
+            telefono,
+            direccion,
+            carrera_id
+        });
+        res.status(201).json({ message: 'Estudiante creado correctamente', estudiante: nuevoEstudiante });
+    } catch (error) {
+        console.error('Error al crear el estudiante:', error);
+        res.status(500).json({ error: 'Error al crear el estudiante.' });
+    }
+});
+app.put('/api/estudiantes-update/:id', async (req, res) => {
+    const { id } = req.params; // ID del estudiante
+    const { nombres, apellidos, dni, fecha_nacimiento, email, telefono, direccion, carrera_id } = req.body;
+
+    try {
+        const [updated] = await estudiantes.update(
+            { nombres, apellidos, dni, fecha_nacimiento, email, telefono, direccion, carrera_id },
+            { where: { id_estudiante: id } }
+        );
+
+        if (updated) {
+            res.status(200).json({ message: 'Estudiante actualizado correctamente.' });
+        } else {
+            res.status(404).json({ error: 'Estudiante no encontrado.' });
+        }
+    } catch (error) {
+        console.error('Error al actualizar el estudiante:', error);
+        res.status(500).json({ error: 'Error al actualizar el estudiante.' });
+    }
+});
+app.get('/api/estudiantes-all', async (req, res) => {
+    try {
+        const estudiantes = await estudiantes.findAll();
+        res.status(200).json(estudiantes);
+    } catch (error) {
+        console.error('Error al obtener los estudiantes:', error);
+        res.status(500).json({ error: 'Error al obtener los estudiantes.' });
+    }
+});
+// POST: Registrar una carrera
+app.post('/api/register-carrera', async (req, res) => {
+    const { nombre, codigo, descripcion, duracion, estado } = req.body;
+
+    try {
+        const nuevaCarrera = await Carreras.create({ nombre, codigo, descripcion, duracion, estado });
+        res.status(201).json({ message: 'Carrera creada correctamente', carrera: nuevaCarrera });
+    } catch (error) {
+        console.error('Error al crear la carrera:', error);
+        res.status(500).json({ error: 'Error al crear la carrera.' });
+    }
+});
+
+// GET: Obtener todas las carreras
+app.get('/api/carreras-all', async (req, res) => {
+    try {
+        const carreras = await Carreras.findAll();
+        res.status(200).json(carreras);
+    } catch (error) {
+        console.error('Error al obtener las carreras:', error);
+        res.status(500).json({ error: 'Error al obtener las carreras.' });
+    }
+});
+
+// PUT: Actualizar una carrera
+app.put('/api/carreras-update/:id', async (req, res) => {
+    const { id } = req.params; // ID de la carrera
+    const { nombre, codigo, descripcion, duracion, estado } = req.body;
+
+    try {
+        const [updated] = await Carreras.update(
+            { nombre, codigo, descripcion, duracion, estado },
+            { where: { id_carrera: id } }
+        );
+
+        if (updated) {
+            res.status(200).json({ message: 'Carrera actualizada correctamente.' });
+        } else {
+            res.status(404).json({ error: 'Carrera no encontrada.' });
+        }
+    } catch (error) {
+        console.error('Error al actualizar la carrera:', error);
+        res.status(500).json({ error: 'Error al actualizar la carrera.' });
+    }
+});
+// POST: Registrar un periodo académico
+app.post('/api/register-periodo', async (req, res) => {
+    const { nombre, fecha_inicio, fecha_fin, estado } = req.body;
+
+    try {
+        const nuevoPeriodo = await Periodos_Academicos.create({ nombre, fecha_inicio, fecha_fin, estado });
+        res.status(201).json({ message: 'Periodo académico creado correctamente', periodo: nuevoPeriodo });
+    } catch (error) {
+        console.error('Error al crear el periodo académico:', error);
+        res.status(500).json({ error: 'Error al crear el periodo académico.' });
+    }
+});
+
+// GET: Obtener todos los periodos académicos
+app.get('/api/periodos-all', async (req, res) => {
+    try {
+        const periodos = await Periodos_Academicos.findAll();
+        res.status(200).json(periodos);
+    } catch (error) {
+        console.error('Error al obtener los periodos académicos:', error);
+        res.status(500).json({ error: 'Error al obtener los periodos académicos.' });
+    }
+});
+
+// PUT: Actualizar un periodo académico
+app.put('/api/periodos-update/:id', async (req, res) => {
+    const { id } = req.params; // ID del periodo
+    const { nombre, fecha_inicio, fecha_fin, estado } = req.body;
+
+    try {
+        const [updated] = await Periodos_Academicos.update(
+            { nombre, fecha_inicio, fecha_fin, estado },
+            { where: { id_periodo: id } }
+        );
+
+        if (updated) {
+            res.status(200).json({ message: 'Periodo académico actualizado correctamente.' });
+        } else {
+            res.status(404).json({ error: 'Periodo académico no encontrado.' });
+        }
+    } catch (error) {
+        console.error('Error al actualizar el periodo académico:', error);
+        res.status(500).json({ error: 'Error al actualizar el periodo académico.' });
+    }
+});
+// POST: Registrar una asignatura
+app.post('/api/register-asignatura', async (req, res) => {
+    const { nombre, codigo, creditos, descripcion, carrera_id, periodo_id } = req.body;
+
+    try {
+        const nuevaAsignatura = await Asignaturas.create({ nombre, codigo, creditos, descripcion, carrera_id, periodo_id });
+        res.status(201).json({ message: 'Asignatura creada correctamente', asignatura: nuevaAsignatura });
+    } catch (error) {
+        console.error('Error al crear la asignatura:', error);
+        res.status(500).json({ error: 'Error al crear la asignatura.' });
+    }
+});
+
+// GET: Obtener todas las asignaturas
+app.get('/api/asignaturas-all', async (req, res) => {
+    try {
+        const asignaturas = await Asignaturas.findAll();
+        res.status(200).json(asignaturas);
+    } catch (error) {
+        console.error('Error al obtener las asignaturas:', error);
+        res.status(500).json({ error: 'Error al obtener las asignaturas.' });
+    }
+});
+
+// PUT: Actualizar una asignatura
+app.put('/api/asignaturas-update/:id', async (req, res) => {
+    const { id } = req.params; // ID de la asignatura
+    const { nombre, codigo, creditos, descripcion, carrera_id, periodo_id } = req.body;
+
+    try {
+        const [updated] = await Asignaturas.update(
+            { nombre, codigo, creditos, descripcion, carrera_id, periodo_id },
+            { where: { id_asignatura: id } }
+        );
+
+        if (updated) {
+            res.status(200).json({ message: 'Asignatura actualizada correctamente.' });
+        } else {
+            res.status(404).json({ error: 'Asignatura no encontrada.' });
+        }
+    } catch (error) {
+        console.error('Error al actualizar la asignatura:', error);
+        res.status(500).json({ error: 'Error al actualizar la asignatura.' });
+    }
+});
 
 // Iniciar el servidor
 app.listen(PORT, () => {
