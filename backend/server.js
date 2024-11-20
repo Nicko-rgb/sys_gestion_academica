@@ -5,6 +5,7 @@ require('dotenv').config();
 const cors = require('cors');
 const db = require('./db');
 const Admins = require('./models/Admin');
+const postulantes = require("./models/Postulantes")
 
 const app = express();
 const PORT = process.env.PORT || 3005;
@@ -13,13 +14,38 @@ app.use(cors());
 app.use(express.json());
 
 // Sincroniza los modelos con la base de datos
+// Sincroniza los modelos con la base de datos
 db.sync({ alter: true })
-    .then(() => {
+db.sync({ alter: true }) // O { force: true } si quieres reiniciar la tabla
+    .then(async () => {
         console.log('Modelos sincronizados con la base de datos.');
+
+        // Verifica si existe un administrador por defecto
+        const defaultAdminDNI = 12345678; // Reemplaza con el DNI que prefieras
+        const defaultAdmin = await Admins.findOne({ where: { dni: defaultAdminDNI } });
+
+        if (!defaultAdmin) {
+            // Si no existe, crea el administrador por defecto
+            const hashedPassword = await bcrypt.hash('admin123', 10); // Reemplaza 'admin123' con tu contraseña por defecto
+            await Admins.create({
+                dni: defaultAdminDNI,
+                nombres: 'Admin',
+                apellidos: 'Default',
+                email: 'admin@example.com', // Reemplaza con tu correo por defecto
+                telefono: '123456789',
+                rol: 'superadmin', // Define un rol adecuado
+                password: hashedPassword,
+                estado: 'activo'
+            });
+            console.log('Administrador por defecto creado correctamente.');
+        } else {
+            console.log('Administrador por defecto ya existe.');
+        }
     })
     .catch(err => {
         console.error('Error al sincronizar los modelos:', err);
     });
+
 
 //ruta para registrar un nuevo admin
 app.post('/api/register-admin', async (req, res) => {
@@ -109,8 +135,27 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
-
+//ruta para registrar un postulante 
+app.post('/api/register-postulante', async (req, res) => {
+    const { nombres, apellidos, dni, fecha_nacimiento, email, telefono, colegio, direccion, carrera } = req.body;
+    try {
+        await postulantes.create({
+            nombres,
+            apellidos,
+            dni,
+            fecha_naci: fecha_nacimiento, // Mapear correctamente
+            email,
+            telefono,
+            colegio_origen: colegio, // Mapear correctamente
+            direccion,
+            carrera_postulada: carrera // Mapear correctamente
+        });
+        res.json({ message: 'Postulante creado correctamente' });
+    } catch (error) {
+        console.error('Error al crear el postulante:', error);
+        res.status(500).json({ error: 'Error al crear el postulante.' });
+    }
+});
 // Iniciar el servidor
 app.listen(PORT, () => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
+    console.log(`Servidor corriendo en http://localhost:${PORT}`)});
