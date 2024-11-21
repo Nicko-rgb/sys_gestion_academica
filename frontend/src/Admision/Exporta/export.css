@@ -1,0 +1,11 @@
+.expAdmision {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 37px;
+    position: relative;
+}
+.expAdmision main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}

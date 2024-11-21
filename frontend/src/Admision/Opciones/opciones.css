@@ -1,0 +1,114 @@
+
+.left-a {
+    width: 230px;
+    height: 100%;
+    background-color: rgb(49, 49, 49); 
+    min-height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 10px;
+    z-index: 3;
+}
+.left-a .title-page {
+    color: dodgerblue;
+    border-bottom: dodgerblue solid;
+    text-align: left;
+
+}
+.left-a .menu {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding-left: 15px;
+    /* position: relative; */
+}
+.box.active {
+    background-color: rgb(76, 74, 74);
+    color: #fff;
+    border-radius: 4px;
+}
+
+.left-a .menu .txt {
+    padding: 5px 7px;
+    transition: .3s ease;
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    position: relative;
+}
+.left-a .menu  .txt .ico-n{
+    position: absolute;
+    right: 3px;
+}
+.left-a .menu .txt:hover {
+    background-color: rgb(76, 74, 74);
+    transform: scale(1.02);
+}
+.left-a .box .opciones {
+    position: absolute;
+    left: 230px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    animation: fadeInn .5s ease;
+
+    background: rgba(255, 255, 255, 0.1); /* Fondo semi-transparente */
+    backdrop-filter: blur(5px); /* Efecto de desenfoque */
+    border-radius: 15px; /* Bordes redondeados */
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Sombra */
+    border: 1px solid rgba(96, 94, 94, 0.355); /* Contorno sutil */
+}
+@keyframes fadeInn {
+    from {
+        opacity: 0;
+        transform: translateY(-150px) translateX(-200px) scale(.2) ;
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+.left-a .box .aaaa {
+    top: 130px;
+}
+
+.left-a .box .cccc {
+    top: 190px;
+}
+
+.left-a .opciones p {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: black;
+    margin: auto;
+    border-bottom: black solid 1px;
+    padding: 0 10px;
+    margin-bottom: 10px;
+}
+
+.left-a .opciones button{
+    text-align: left;
+    justify-content: start;
+    color: dodgerblue;
+    font-size: 15px;
+    background: transparent;
+}
+.left-a .opciones button:hover{
+    font-weight: none;
+    backdrop-filter: blur(20px);
+    background-color: #37ae9433;
+    border-radius: 4px;
+    font-weight: bold;
+}

@@ -1,0 +1,59 @@
+.subir-admision {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 37px;
+    position: relative;
+}
+.subir-admision main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.subir-admision .acciont {
+    padding: 0;
+    margin: 0;
+}
+
+.subir-admision .acciont div {
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+.subir-admision .acciont .ico {
+    font-size: 25px;
+    width: 100%;
+    margin: 0;
+}
+
+.subir-admision .form-admiPunto {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.644);
+    display: flex;
+    justify-content: center;
+    z-index: 600;
+    overflow-y: auto;
+    padding: 30px 0;
+}
+.subir-admision .form-admiPunto form {
+    background-color: white;
+    padding: 20px 30px;
+    max-width: 580px;
+    width: 100%;
+    animation: fadeIn .5s ease ;
+    height: 680px;
+    border-radius: 12px;
+    position: relative;
+}
+.form-admiPunto .close {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-weight: bold;
+    font-size: 35px;
+}

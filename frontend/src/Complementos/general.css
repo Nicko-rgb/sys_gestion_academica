@@ -66,6 +66,21 @@ button:hover{
     margin: 0;
 }
 
+.btn-reg {
+    position: absolute;
+    background-color: dodgerblue;
+    font-weight: bold;
+    font-size: 14px;
+    color: white;
+    border-radius: 8px;
+    padding: 6px 8px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.474);
+    z-index: 2;
+}
+.btn-reg .ico-reg {
+    font-size: 17px;
+}
+
 
 .title-page {
     text-transform: uppercase;
@@ -85,22 +100,31 @@ button:hover{
     font-size: 16px;
     font-weight: bold;
 }
-.volver-link {
+.volver-box {
     position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 10px;
     z-index: 2;
+    background-color: rgb(236, 236, 236);
+}
+.volver-link {
     font-size: 14px;
     height: 27px;
     font-weight: bold;
     color: white;
-    background-color: dodgerblue;
     background-color: rgba(30, 143, 255, 0.331);
     background-color: #37ae94a5;
+    display: flex;
 }
 .volver-link:hover {
     background-color: #37ae94e3;
 }
 
 /* STYLO DE TABLAS */
+table {
+    border-collapse: collapse
+}
 table th {
     font-size: 13px;
     font-weight: 550;
@@ -157,4 +181,5 @@ form input:focus {
 .email{
     text-transform: none;
 }
+
 

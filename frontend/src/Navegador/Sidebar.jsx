@@ -10,9 +10,9 @@ import { MdOutlineReportGmailerrorred } from "react-icons/md";
 import { IoPeopleSharp } from "react-icons/io5";
 import { Link } from 'react-router-dom';
 
-const Sidebar = ({ close, sidebar }) => {
+const Sidebar = ({ close, sidebar, sidebarTrue }) => {
     return (
-        <div className={`sidebar ${sidebar ? 'active' : ''}`}>
+        <div className={`sidebar ${sidebar? 'active' : ''}`}>
             <IoClose onClick={close} className='ico-close' />
             <h2 className="title-page">Gestión Académica</h2>
             <ul className="menu">

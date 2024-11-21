@@ -1,0 +1,19 @@
+
+.matricula main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+.matricula .btn-reg {
+    right: 30px;
+    top: 70px;
+}
+.matricula .acciones {
+    position: relative;
+    margin: 10px;
+}
+.matricula .volver-box {
+    top: -30px;
+    left: 0px;
+}
