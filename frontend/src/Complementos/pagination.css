@@ -1,0 +1,13 @@
+.paginacion {
+    display: flex;
+    gap: 20px;
+    margin: 20px;
+}
+.paginacion button {
+    width: 110px;
+    font-size: 12px;
+    background-color: rgb(236, 236, 236);
+}
+.paginacion button:hover {
+    font-weight: bold;
+}

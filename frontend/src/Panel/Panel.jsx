@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useState } from 'react';
 import './panel.css'
 import { Link, useNavigate } from 'react-router-dom';
 import NavPie from '../Navegador/NavPie';
@@ -7,33 +7,35 @@ import { IoMdOpen } from "react-icons/io";
 
 const Panel = () => {
 
+    const [sidebarTrue] = useState(true)
+
     return (
         <div className="principal panel">
-            <NavTop />
+            <NavTop sidebarTrue={sidebarTrue} />
             <main>
                 <h5 className='title-page'>SISTEMA DE GESTION ACADÉMICA - IESTP SUIZA</h5>
                 <div>
-                    <Link>
+                    <Link className='aaa'>
                         <IoMdOpen  className='ico'/>
                         <p>ESTUDIANTES</p>
                         <button>Acción</button>
                     </Link>
-                    <Link>
+                    <Link className='aaa'>
                         <IoMdOpen  className='ico'/>
                         <p>CARRERAS</p>
                         <button>Acción</button>
                     </Link>
-                    <Link>
+                    <Link className='aaa' to='/matricula'>
                         <IoMdOpen className='ico' />
-                        <p>MATRICULAS</p>
+                        <p>MATRICULAS Y PAGOS</p>
                         <button>Acción</button>
                     </Link>
-                    <Link to='/admision'>
+                    <Link className='aaa' to='/admision'>
                         <IoMdOpen  className='ico'/>
                         <p>ADMISION</p>
                         <button>Acción</button>
                     </Link>
-                    <Link>
+                    <Link className='aaa'>
                         <IoMdOpen  className='ico'/>
                         <p>NOTAS DE ESTUDIANTES</p>
                         <button>Acción</button>

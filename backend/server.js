@@ -4,16 +4,20 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const cors = require('cors');
 const db = require('./db');
-const Admins = require('./models/Admin');
-const Postulantes = require('./models/Postulantes');
-const profesores = require('./models/Profesores');
-const estudiantes = require('./models/Estudiantes');
-const Carreras = require('./models/carreras');
-const Periodos_Academicos = require('./models/Periodos');
-const Asignaturas = require('./models/Asignaturas')
-const Matriculas = require('./models/matricula')
-const PlanesEstudio = require('./models/planesdeEstudios')
-const Notas = require('./models/notas')
+const inicalizaInsersion = require('./InsertarDatos/index')
+// Importar todos los modelos
+const {
+    Admins,
+    profesores,
+    estudiantes,
+    Carreras,
+    Periodos_Academicos,
+    Asignaturas,
+    Postulantes,
+    PostulanteResultado
+} = require('./models/index'); // Asegúrate de que la ruta sea correcta
+
+
 const app = express();
 const PORT = process.env.PORT || 3005;
 
@@ -24,28 +28,8 @@ app.use(express.json());
 db.sync({ alter: true }) // O { force: true } si quieres reiniciar la tabla
     .then(async () => {
         console.log('Modelos sincronizados con la base de datos.');
-
-        // Verifica si existe un administrador por defecto
-        const defaultAdminDNI = 12345678; // Reemplaza con el DNI que prefieras
-        const defaultAdmin = await Admins.findOne({ where: { dni: defaultAdminDNI } });
-
-        if (!defaultAdmin) {
-            // Si no existe, crea el administrador por defecto
-            const hashedPassword = await bcrypt.hash('admin123', 10); // Reemplaza 'admin123' con tu contraseña por defecto
-            await Admins.create({
-                dni: defaultAdminDNI,
-                nombres: 'Admin',
-                apellidos: 'Default',
-                email: 'admin@example.com', // Reemplaza con tu correo por defecto
-                telefono: '123456789',
-                rol: 'superadmin', // Define un rol adecuado
-                password: hashedPassword,
-                estado: 'activo'
-            });
-            console.log('Administrador por defecto creado correctamente.');
-        } else {
-            console.log('Administrador por defecto ya existe.');
-        }
+        // Inicializa inseersion de datos a la base de datos
+        inicalizaInsersion();
     })
     .catch(err => {
         console.error('Error al sincronizar los modelos:', err);
@@ -156,12 +140,94 @@ app.post('/api/register-postulante', async (req, res) => {
             direccion,
             carrera_postulada: carrera // Mapear correctamente
         });
+        console.log('Postulante registrado con exito');
         res.json({ message: 'Postulante creado correctamente' });
     } catch (error) {
         console.error('Error al crear el postulante:', error);
         res.status(500).json({ error: 'Error al crear el postulante.' });
     }
 });
+
+//ruta para obtner todos los postulante 
+app.get('/api/obtener-postulantes', async (req, res) => {
+    try {
+        // Buscar todos los postulantes con sus resultados
+        const postulantes = await Postulantes.findAll({
+            include: {
+                model: require('./models/PostulanteResultado'),
+                as: 'resultado', // Usa el alias definido en el modelo
+            },
+        });
+
+        res.status(200).json(postulantes);
+    } catch (error) {
+        console.error('Error al obtener los postulantes:', error);
+        res.status(500).json({ error: 'Error al procesar la solicitud' });
+    }
+})
+
+
+//ruta para obtener datos de postulante por id
+app.get('/api/postulante/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        // Buscar el postulante con su resultado
+        const postulante = await Postulantes.findByPk(id, {
+            include: {
+                model: require('./models/PostulanteResultado'),
+                as: 'resultado', // Usa el alias definido en el modelo
+            },
+        });
+
+        if (!postulante) {
+            return res.status(404).json({ error: 'Postulante no encontrado' });
+        }
+
+        res.status(200).json(postulante);
+    } catch (error) {
+        console.error('Error al obtener postulante:', error);
+        res.status(500).json({ error: 'Error al procesar la solicitud' });
+    }
+});
+
+// Obtener postulantes por nombre de carrera
+app.get('/api/postulantes-carrera/:carrera', async (req, res) => {
+    const carrera = req.params.carrera; 
+    try {
+        const postulantes = await Postulantes.findAll({
+            where: {
+                carrera_postulada: carrera
+            },
+            include: {
+                model: require('./models/PostulanteResultado'),
+                as: 'resultado',
+            }
+        });
+
+        res.json(postulantes);
+    } catch (error) {
+        console.error('Error al obtener postulantes:', error);
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
+});
+
+//Ruta  para registrar puntaje de postulante 
+app.post('/api/register/admision-puntos', async (req, res) => {
+    const { id_postulante, puntaje, condicion } = req.body;
+    try {
+        await PostulanteResultado.create({
+            id_postulante,
+            puntaje,
+            condicion
+        })
+        res.json({ message: 'Admision de puntos exitosa' });
+    } catch (error) {
+        console.error('Error al registrar puntaje de postulante:', error);
+    }
+})
+
+
 // Ruta para registrar un nuevo profesor (POST)
 app.post('/api/register-profesor', async (req, res) => {
     const { nombres, apellidos, dni, email, telefono, carrera_asignada, rol } = req.body;

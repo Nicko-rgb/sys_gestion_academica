@@ -7,6 +7,9 @@ import Panel from './Panel/Panel';
 import ListaAdmin from './Admins/ListaAdmin';
 import Perfil from './Admins/Perfil/Perfil';
 import Admision from './Admision/Admision';
+import Matricula from './Matriculas/Matricula';
+import SubirAdmision from './Admision/SubirAdmision/SubirAdmision';
+import ExportaPdf from './Admision/Exporta/ExportaPdf';
 
 const App = () => {
 
@@ -32,6 +35,9 @@ const App = () => {
                     <Route path="/admins" element={<ListaAdmin />} />
                     <Route path="/admision" element={<Admision />} />
                     <Route path="/:perfil/:name/:id" element={<Perfil />} />
+                    <Route path="/matricula" element={<Matricula />} />
+                    <Route path="/admision-upload/:carrera" element={<SubirAdmision />} />
+                    <Route path="/admision-export/:carrera" element={<ExportaPdf />} />
                 </Routes>
             </BrowserRouter>
         </div>

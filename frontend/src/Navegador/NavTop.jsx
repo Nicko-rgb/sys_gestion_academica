@@ -10,12 +10,13 @@ import Sidebar from './Sidebar';
 import ModalConfir from '../Modals/ModalConfir';
 import EstadoSesion from '../Complementos/EstadoSesion';
 
-const NavTop = () => {
+const NavTop = ({sidebarTrue} ) => {
     const [sidebar, setSidebar] = useState(false);
     const navigate = useNavigate();
     const [modalOpen, setModalClose] = useState(false)
     const token = localStorage.getItem('token');
     const { nombre, rutaPerfil, handleLogout } = EstadoSesion()
+
     useEffect(() => {
         if (!token) {
             navigate('/');
@@ -55,7 +56,7 @@ const NavTop = () => {
                 <FaPowerOff className='ico ico-o' onClick={handleModalSesion} title='CERRAR SESION'/>
                 <FaBarsStaggered className='ico ico-m' onClick={handleSidebar} title='MENÚ' />
             </div>
-            <Sidebar close={handleSidebar} sidebar={sidebar} />
+            <Sidebar close={handleSidebar} sidebar={sidebar} sidebarTrue={sidebarTrue} />
             {modalOpen && (
                 <ModalConfir 
                     close={handleModalSesion} 
