@@ -16,8 +16,9 @@ const Admision = () => {
     const [selectedCarrera, setSelectedCarrera] = useState('');
     const [selectedCondicion, setSelectedCondicion] = useState('');
     const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+    const [currentPage, setCurrentPage] = useState(1);
+    const resultsPerPage = 10;
 
-    // Obtener postulantes desde la API
     const fetchPostulantes = async () => {
         setLoading(true);
         try {
@@ -31,7 +32,6 @@ const Admision = () => {
         }
     };
 
-    // Obtener carreras
     const fetchCarreras = async () => {
         try {
             const response = await axios.get('http://localhost:3005/api/carreras-all');
@@ -41,7 +41,6 @@ const Admision = () => {
         }
     };
 
-    // Obtener solo los años únicos de las fechas, ordenados de mayor a menor
     const getUniqueYears = () => {
         const years = postulantes.map((data) => new Date(data.createdAt).getFullYear());
         return [...new Set(years)].sort((a, b) => b - a);
@@ -52,12 +51,11 @@ const Admision = () => {
         fetchCarreras();
     }, []);
 
-    // Manejo de búsqueda
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value.toLowerCase());
+        setCurrentPage(1); // Reinicia a la primera página al buscar
     };
 
-    // Filtrar postulantes según los filtros
     const filteredPostulantes = postulantes.filter((postulante) => {
         const yearMatch = selectedYear
             ? new Date(postulante.createdAt).getFullYear() === selectedYear
@@ -76,6 +74,25 @@ const Admision = () => {
 
         return yearMatch && carreraMatch && condicionMatch && searchMatch;
     });
+
+    // Calcular los datos para la página actual
+    const indexOfLastItem = currentPage * resultsPerPage;
+    const indexOfFirstItem = indexOfLastItem - resultsPerPage;
+    const currentPostulantes = filteredPostulantes.slice(indexOfFirstItem, indexOfLastItem);
+
+    const totalPages = Math.ceil(filteredPostulantes.length / resultsPerPage);
+
+    const handleNextPage = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
+    const handlePrevPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
 
     return (
         <div className="principal admision">
@@ -111,7 +128,7 @@ const Admision = () => {
                         value={selectedYear}
                         onChange={(e) => setSelectedYear(Number(e.target.value))}
                     >
-                        <option value={new Date().getFullYear()} >Año</option>
+                        <option value={new Date().getFullYear()}>Año</option>
                         {getUniqueYears().map((year, index) => (
                             <option key={index} value={year}>
                                 {year}
@@ -120,7 +137,7 @@ const Admision = () => {
                     </select>
                 </div>
 
-                <p className="contador">{filteredPostulantes.length} de {postulantes.length}</p>
+                <p className="contador">{currentPostulantes.length} de {filteredPostulantes.length}</p>
                 <table>
                     <thead>
                         <tr>
@@ -140,14 +157,18 @@ const Admision = () => {
                             <tr>
                                 <td colSpan={9}>Cargando...</td>
                             </tr>
-                        ) : filteredPostulantes.length === 0 ? (
+                        ) : currentPostulantes.length === 0 ? (
                             <tr>
-                                <td colSpan={9}>Búsqueda no encontrada para "{searchTerm}"</td>
+                                {searchTerm ? (
+                                    <td colSpan={9}>Búsqueda no encontrada para "{searchTerm}"</td>
+                                ) : (
+                                    <td colSpan={9}>No hay resultados</td>
+                                )}
                             </tr>
                         ) : (
-                            filteredPostulantes.map((dato, index) => (
+                            currentPostulantes.map((dato, index) => (
                                 <tr key={index}>
-                                    <td>{index + 1}</td>
+                                    <td>{indexOfFirstItem + index + 1}</td>
                                     <td>{dato.apellidos}</td>
                                     <td>{dato.nombres}</td>
                                     <td>{dato.dni}</td>
@@ -161,7 +182,11 @@ const Admision = () => {
                         )}
                     </tbody>
                 </table>
-                <BtnPagina />
+
+                <BtnPagina
+                    back={currentPage > 1 ? handlePrevPage : null}
+                    next={currentPage < totalPages ? handleNextPage : null}
+                />
             </section>
             <NavPie />
         </div>

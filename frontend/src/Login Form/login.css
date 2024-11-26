@@ -13,7 +13,7 @@
 }
 
 .login .infor {
-    background-color: dodgerblue;
+    background-color: rgb(72, 164, 255);
     justify-content: space-between;
     align-items: center;
 }
@@ -70,6 +70,7 @@
     font-size: 16px;
     border: #37ae94 solid 1px;
     border-radius: 4px;
+    text-transform: none;
 }
 .login form input:focus {
     border: 2px dodgerblue solid;
