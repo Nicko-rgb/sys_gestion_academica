@@ -11,3 +11,10 @@
 .paginacion button:hover {
     font-weight: bold;
 }
+.paginacion button:disabled:hover {
+    width: 110px;
+    font-size: 12px;
+    background-color: rgb(236, 236, 236);
+    transform: none;
+    cursor: no-drop;
+}

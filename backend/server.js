@@ -9,12 +9,13 @@ const inicalizaInsersion = require('./InsertarDatos/index')
 const {
     Admins,
     profesores,
-    estudiantes,
+    Estudiantes,
     Carreras,
     Periodos_Academicos,
     Asignaturas,
     Postulantes,
-    PostulanteResultado
+    PostulanteResultado,
+    PagoPostulante
 } = require('./models/index'); // Asegúrate de que la ruta sea correcta
 
 
@@ -129,7 +130,8 @@ app.post('/api/register-postulante', async (req, res) => {
     const { nombres, apellidos, dni, fecha_nacimiento, email, telefono, colegio, direccion, carrera } = req.body;
 
     try {
-        await Postulantes.create({
+        // Crear el registro en la base de datos
+        const postulante = await Postulantes.create({
             nombres,
             apellidos,
             dni,
@@ -140,13 +142,72 @@ app.post('/api/register-postulante', async (req, res) => {
             direccion,
             carrera_postulada: carrera // Mapear correctamente
         });
-        console.log('Postulante registrado con exito');
-        res.json({ message: 'Postulante creado correctamente' });
+        // Respuesta con datos del postulante creado
+        res.status(201).json({
+            message: 'Postulante creado correctamente',
+            postulante: { id: postulante.id_postulante, nombres: postulante.nombres, apellidos: postulante.apellidos, dni: postulante.dni}
+        });
     } catch (error) {
         console.error('Error al crear el postulante:', error);
-        res.status(500).json({ error: 'Error al crear el postulante.' });
+
+        // Respuesta de error según el tipo de problema
+        if (error.name === 'SequelizeValidationError') {
+            return res.status(400).json({ error: 'Datos inválidos en la solicitud', details: error.errors });
+        }
+
+        res.status(500).json({ error: 'Error interno al crear el postulante.' });
     }
 });
+
+// Ruta para registrar un pago de postulante
+app.post('/api/register-pago/postulante', async (req, res) => {
+    const { id_postulante, monto } = req.body;
+
+    try {
+        // Verifica que el postulante exista
+        const postulante = await Postulantes.findByPk(id_postulante);
+        if (!postulante) {
+            return res.status(404).json({ message: 'Postulante no encontrado' });
+        }
+
+        // Crea el pago
+        await PagoPostulante.create({
+            id_postulante,
+            monto,
+            fecha_pago: new Date()
+        });
+
+        return res.status(201).json({ message: 'Pago registrado con éxito' });
+    } catch (error) {
+        console.error('Error al registrar el pago:', error);
+        return res.status(500).json({ message: 'Error al registrar el pago', error: error.message });
+    }
+});
+
+
+//ruta para eliminar postulante por id
+app.delete('/api/delete-postulante/:id', async (req, res) => {
+    const id_postulante = req.params.id; // Obtiene el ID del postulante desde los parámetros
+
+    try {
+        // Verifica que el postulante exista
+        const postulante = await Postulantes.findByPk(id_postulante);
+        if (!postulante) {
+            return res.status(404).json({ message: 'Postulante no encontrado' });
+        }
+
+        // Elimina el postulante
+        await Postulantes.destroy({ where: { id_postulante } });
+
+        return res.status(200).json({ message: 'Postulante eliminado con éxito' });
+    } catch (error) {
+        console.error('Error al eliminar el postulante:', error);
+        return res.status(500).json({ message: 'Error al eliminar el postulante', error: error.message });
+    }
+});
+
+
+
 
 //ruta para obtner todos los postulante 
 app.get('/api/obtener-postulantes', async (req, res) => {
@@ -154,8 +215,8 @@ app.get('/api/obtener-postulantes', async (req, res) => {
         // Buscar todos los postulantes con sus resultados
         const postulantes = await Postulantes.findAll({
             include: {
-                model: require('./models/PostulanteResultado'),
-                as: 'resultado', // Usa el alias definido en el modelo
+                model: PostulanteResultado,
+                as: 'resultado',
             },
         });
 
@@ -216,17 +277,43 @@ app.get('/api/postulantes-carrera/:carrera', async (req, res) => {
 app.post('/api/register/admision-puntos', async (req, res) => {
     const { id_postulante, puntaje, condicion } = req.body;
     try {
-        await PostulanteResultado.create({
-            id_postulante,
-            puntaje,
-            condicion
-        })
-        res.json({ message: 'Admision de puntos exitosa' });
+        const resultado = await PostulanteResultado.findOne({ where: { id_postulante } });
+
+        if (resultado) {
+            // Si existe, actualiza el registro
+            resultado.puntaje = puntaje;
+            resultado.condicion = condicion;
+            await resultado.save();
+            res.json({ message: 'Puntos actualizados exitosamente' });
+        } else {
+            // Si no existe, crea un nuevo registro
+            await PostulanteResultado.create({
+                id_postulante,
+                puntaje,
+                condicion
+            });
+            res.json({ message: 'Admision de puntos exitosa' });
+        }
     } catch (error) {
         console.error('Error al registrar puntaje de postulante:', error);
+        res.status(500).json({ message: 'Error al registrar puntaje' });
+    }
+});
+
+//Api para obtener todos los estudiantes
+app.get('/api/obtener-estudiantes', async (req, res) => {
+    try {
+        const estudiantes = await Estudiantes.findAll({
+            include: {
+                model: Carreras,
+                as: 'carrera',
+            }
+        });
+        res.json(estudiantes);
+    } catch (error) {
+        console.error('Error al obtener estudiantes:', error);
     }
 })
-
 
 // Ruta para registrar un nuevo profesor (POST)
 app.post('/api/register-profesor', async (req, res) => {

@@ -32,7 +32,7 @@ const Panel = () => {
                     </Link>
                     <Link className='aaa' to='/admision'>
                         <IoMdOpen  className='ico'/>
-                        <p>ADMISION</p>
+                        <p>EXAMEN DE ADMISION</p>
                         <button>Acción</button>
                     </Link>
                     <Link className='aaa'>

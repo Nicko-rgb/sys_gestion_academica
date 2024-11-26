@@ -9,11 +9,35 @@
     right: 30px;
     top: 70px;
 }
+.matricula .sub-title-page {
+    margin-top: -10px;
+}
 .matricula .acciones {
     position: relative;
     margin: 10px;
+    display: flex;
+    gap: 10px;
+    margin-top: 35px;
 }
 .matricula .volver-box {
-    top: -30px;
+    top: -33px;
     left: 0px;
+}
+.matricula .table-contend {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.matricula .table-contend .contador {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.matricula table .acc-t  {
+    /* padding: 0; */
+}
+.matricula .acc-t button {
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
 }
