@@ -16,9 +16,9 @@ const Sidebar = ({ close, sidebar, sidebarTrue }) => {
             <IoClose onClick={close} className='ico-close' />
             <h2 className="title-page">Gestión Académica</h2>
             <ul className="menu">
-                <Link to='' className='p'><PiStudentBold />Estudiantes</Link>
+                <Link to='/estudiantes' className='p'><PiStudentBold />Estudiantes</Link>
                 <Link to='' className='p'><PiBooksBold /> Cursos</Link>
-                <Link to='' className='p'><TfiWrite />Calificaciones</Link>
+                <Link to='/notas' className='p'><TfiWrite />Calificaciones</Link>
                 <Link to='' className='p'><LuCheckSquare />Asistencia</Link>
                 <Link to='/admins' className='p'><IoPeopleSharp style={{fontSize: '19px'}}/>Administradores</Link>
                 <Link to='' className='p'><MdOutlineReportGmailerrorred style={{fontSize: '20px'}} />Reportes</Link>

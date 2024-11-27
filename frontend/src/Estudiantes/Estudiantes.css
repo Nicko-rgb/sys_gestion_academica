@@ -16,30 +16,24 @@
     color: #0056b3;
     text-transform: uppercase;
 }
-
+.estudiantes main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 /* Action buttons and search bar */
+.estudiantes .acciones .volver-box {
+    top: -35px;
+}
 .estudiantes .acciones {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
     margin-bottom: 20px;
-    margin-top: 30px; /* Ajusta el valor para mover el buscador más abajo */
-}
-
-.estudiantes .acciones button {
-    background-color: #0056b3;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-}
-
-.estudiantes .acciones button:hover {
-    background-color: #003d80;
+    margin-top: 30px;
+    gap: 10px;
 }
 
 .estudiantes .acciones select,
@@ -48,6 +42,17 @@
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 5px;
+}
+.estudiantes .acciones input {
+    padding-left: 40px;
+}
+.estudiantes .acciones .ico {
+    top: 10px;
+    font-size: 25px;
+    left: 10px;
+}
+.estudiantes .contador {
+    text-align: center;
 }
 
 /* Table styles */

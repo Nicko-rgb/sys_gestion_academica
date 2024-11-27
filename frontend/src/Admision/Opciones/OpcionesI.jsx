@@ -62,7 +62,7 @@ const OpcionesI = () => {
 
     return (
         <section className="left-a">
-            <h3 className="title-page">PANEL DE OPCIONES</h3>
+            <h3 className="title-page">MENÚ DE OPCIONES</h3>
             <div className="menu">
                 <div className={`box ${selectedBox === 'home' ? 'active' : ''}`} onClick={() => navigateAdmision('home')}>
                     <p className='txt'><TbHomeCog />Admisión</p>
@@ -98,9 +98,6 @@ const OpcionesI = () => {
                 </div>
                 <div className={`box ${selectedBox === 'imprimir' ? 'active' : ''}`} onClick={() => handleBoxClick('imprimir')}>
                     <p className='txt'>Imprimir Tabla</p>
-                </div>
-                <div className={`box ${selectedBox === 'buscar' ? 'active' : ''}`} onClick={() => handleBoxClick('buscar')}>
-                    <p className='txt'>Buscar</p>
                 </div>
             </div>
         </section>

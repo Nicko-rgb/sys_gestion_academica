@@ -123,7 +123,7 @@ button:hover{
 
 /* STYLO DE TABLAS */
 table {
-    border-collapse: collapse
+    border-collapse: collapse;
 }
 table th {
     font-size: 13px;

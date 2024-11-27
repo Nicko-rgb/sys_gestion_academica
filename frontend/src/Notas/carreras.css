@@ -1,0 +1,80 @@
+.carrerasN main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.carrerasN main .boxs {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 860px;
+    width: 100%;
+    justify-content: center;
+    gap: 15px;
+    position: relative;
+    margin-top: 15px;
+}
+
+.carrerasN .volver-box {
+    top: -35px;
+    left: 5px;
+}
+
+.carrerasN .boxs .box {
+    font-family: 'poppins';
+    padding: 5px;
+    width: 200px;
+    height: 65px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    background-color: white;
+    border: none;
+    box-shadow: 0 0 5px black;
+    border-radius: 2px;
+    font-size: 16px;
+    height: 100px;
+    transition: 0.3s ease;
+    position: relative;
+}
+
+.carrerasN .boxs .box:hover {
+    transform: scale(1.05);
+    color: white;
+    background-color: #00796b94;
+    box-shadow: 0 0 3px #00796b;
+}
+
+.carrerasN .box .name {
+    font-weight: bold;
+    text-align: center;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.carrerasN main .box::before {
+    position: absolute;
+    content: '';
+    width: 8px;
+    height: 8px;
+    top: 10px;
+    right: 10px;
+    background-color: rgb(13, 194, 13);
+    border-radius: 50%;
+}
+
+.carrerasN .box button {
+    padding: 0;
+    width: 90px;
+    font-size: 14px;
+    /* font-weight: bold; */
+    background-color: rgb(57, 145, 234);
+    color: white;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}

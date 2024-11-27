@@ -361,6 +361,16 @@ app.post('/api/registrar-matricula', async (req, res) => {
 });
 
 
+//ruta para obtner todas las asignatuas
+app.get('/api/asignaturas', async (req, res) => {
+    try {
+        const asignaturas = await Asignaturas.findAll();
+        res.json(asignaturas);
+    } catch (error) {
+        console.error('Error al obtener asignaturas:', error);
+    }
+})
+
 // Ruta para registrar un nuevo profesor (POST)
 app.post('/api/register-profesor', async (req, res) => {
     const { nombres, apellidos, dni, email, telefono, carrera_asignada, rol } = req.body;

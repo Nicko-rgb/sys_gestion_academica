@@ -35,7 +35,7 @@ const Panel = () => {
                         <p>EXAMEN DE ADMISION</p>
                         <button>Acción</button>
                     </Link>
-                    <Link className='aaa' to='/notas'>
+                    <Link className='aaa' to='/selectCaEs'>
                         <IoMdOpen  className='ico'/>
                         <p>NOTAS DE ESTUDIANTES</p>
                         <button>Acción</button>
