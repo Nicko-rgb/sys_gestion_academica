@@ -1,11 +1,11 @@
 // db.js
 const { Sequelize } = require('sequelize');
+require('dotenv').config(); // Cargar las variables de entorno
 
-// Configura la conexión a la base de datos PostgreSQL
-const db = new Sequelize('gestion_academica', 'postgres', '159357', {
-    host: 'localhost',
+// Obtiene la URL de conexión desde las variables de entorno
+const db = new Sequelize(process.env.DATABASE_URL, {
     dialect: 'postgres',
-    logging: false
+    logging: false,
 });
 
 // Verifica la conexión
