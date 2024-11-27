@@ -139,8 +139,11 @@ table td {
     padding: 4px 5px;
     text-transform: uppercase;
 }
+table tr:hover {
+    background-color: rgba(30, 143, 255, 0.293);
+}
 table th, table td {
-    border: #00886b solid 1px;
+    border: #00886a51 solid 1px;
 }
 
 /* STYLO DE FORMULARIO */

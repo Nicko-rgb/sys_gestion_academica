@@ -1,0 +1,80 @@
+.carreras main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+.carreras main .boxs {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 940px;
+    width: 100%;
+    justify-content: center;
+    gap: 15px;
+    position: relative;
+    margin-top: 15px;
+}
+.carreras .volver-box {
+    top: -35px;
+    left: 5px;
+}
+.carreras main .box {
+    max-width: 300px;
+    width: 100%;
+    padding: 15px;
+    border: #00a07d solid 1px;
+    box-shadow:  4px 4px 4px rgba(0, 0, 0, 0.375);
+    transition: .3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.carreras main .box:hover {
+    transform: scale(1.02);
+    box-shadow: none;
+}
+.carreras .box .name {
+    font-weight: bold;
+    text-align: center;
+    font-size: 15px;
+    text-transform: uppercase;
+}
+.carreras .box .desc {
+    font-size: 13px;
+    padding: 5px 0;
+}
+.carreras main .box div {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.carreras main .box div p{
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.carreras main .box div .std::before{
+    content: '';
+    width: 8px;
+    height: 8px;
+    background-color: rgb(13, 194, 13);
+    border-radius: 50%;
+}
+.carreras .box button {
+    padding: 0;
+    width: 90px;
+    font-size: 14px;
+    /* font-weight: bold; */
+    background-color: rgb(57, 145, 234);
+    color: white;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+
+

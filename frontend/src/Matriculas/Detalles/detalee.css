@@ -76,6 +76,9 @@
     flex-direction: column;
     justify-content: space-between;
 }
+.matride .ciclos .box-m {
+    background-color: #4cffd843;
+}
 .matride .ciclos .box h5 {
     text-align: center;
     margin: 0;
@@ -116,6 +119,14 @@
     color: white;
 }
 .matride .ciclos .indicador .sii {
-    background-color: #37ae94;
+    background-color: #00a984;
     width: 100%;
+    color: white;
+}
+
+/* FORMULARIO */
+.form-admision .montoo input {
+    text-align: center;
+    font-weight: bold;
+    border: rgba(58, 212, 58, 0.403) solid 2px;
 }
