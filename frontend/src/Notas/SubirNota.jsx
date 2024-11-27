@@ -84,7 +84,7 @@ const SubirNota = () => {
     };
 
     // Validar notas del estudiante
-    const notas = student.notas || [];
+    const notass = student.notas || [];
 
 
     return (
@@ -126,7 +126,7 @@ const SubirNota = () => {
                             <div className="box" key={curso.id}>
                                 <p>{curso.nombre}</p>
                                 {/* Mostrar el promedio si existe una nota asociada */}
-                                {notas
+                                {notass
                                     .filter((nota) => nota.curso === curso.nombre)
                                     .map((nota, index) => (
                                         <p key={index}>PROMEDIO: {nota.promedio}</p>
