@@ -6,6 +6,7 @@ import { TbDatabaseExport } from "react-icons/tb";
 import { TbHomeCog } from "react-icons/tb";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { jsPDF } from "jspdf";
 
 const OpcionesI = () => {
     const [carreras, setCarreras] = useState([])
