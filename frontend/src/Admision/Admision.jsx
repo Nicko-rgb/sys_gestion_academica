@@ -32,7 +32,12 @@ const Admision = () => {
         }
     };
 
-    const fetchCarreras = async () => {
+/*************  ✨ Codeium Command ⭐  *************/
+    /**
+     * Fetches the list of all available careers from the API and updates the
+     * component state with the response data.
+     */
+/******  0f511bb3-7ed3-480f-bcc3-a627911d1208  *******/    const fetchCarreras = async () => {
         try {
             const response = await axios.get('http://localhost:3005/api/carreras-all');
             setCarreras(response.data);
