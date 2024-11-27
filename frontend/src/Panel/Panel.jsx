@@ -15,7 +15,7 @@ const Panel = () => {
             <main>
                 <h5 className='title-page'>SISTEMA DE GESTION ACADÉMICA - IESTP SUIZA</h5>
                 <div>
-                    <Link className='aaa'>
+                    <Link className='aaa' to='/estudiantes'>
                         <IoMdOpen  className='ico'/>
                         <p>ESTUDIANTES</p>
                         <button>Acción</button>
@@ -35,7 +35,7 @@ const Panel = () => {
                         <p>EXAMEN DE ADMISION</p>
                         <button>Acción</button>
                     </Link>
-                    <Link className='aaa'>
+                    <Link className='aaa' to='/notas'>
                         <IoMdOpen  className='ico'/>
                         <p>NOTAS DE ESTUDIANTES</p>
                         <button>Acción</button>
