@@ -34,7 +34,7 @@ const Form = ({ close }) => {
             if (!response.ok) {
                 throw new Error('Error en la creación del usuario');
             }
-
+            alert('REGISTRO EXITOSO')
             close();
         } catch (error) {
             console.error('Error al registrar el usuario:', error);

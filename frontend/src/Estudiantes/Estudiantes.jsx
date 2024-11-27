@@ -27,7 +27,7 @@ const Estudiantes = () => {
     // Obtener carreras
     const fetchCareers = async () => {
         try {
-            const response = await axios.get('http://localhost:3005/api/obtener-carreras');
+            const response = await axios.get('http://localhost:3005/api/carreras-all');
             setCareers(response.data || []);
         } catch (error) {
             console.error('Error al obtener carreras:', error);
@@ -76,25 +76,17 @@ const Estudiantes = () => {
     return (
         <div className="principal estudiantes">
             <NavTop />
-            <main>
-                <div className="acciones-top">
-                    <Volver />
-                </div>
-                
+            <main>                
                 <h3 className="title-page">LISTA DE ESTUDIANTES</h3>
-
-                {/* Mueve el Buscardor aquí, debajo del título */}
-                <div className="buscador-section">
-                    <Buscardor onSearchChange={handleSearchChange} />
-                </div>
-
                 <div className="acciones">
+                    <Volver />
+                    <Buscardor onSearchChange={handleSearchChange} />
                     <select
                         className="carre-s"
                         value={selectedCarrera}
                         onChange={(e) => setSelectedCarrera(e.target.value)}
                     >
-                        <option value="">Seleccionar Carrera</option>
+                        <option value="">Todas las carreras</option>
                         {careers.map((career) => (
                             <option key={career.id} value={career.nombre}>
                                 {career.nombre}
@@ -105,7 +97,7 @@ const Estudiantes = () => {
 
                 <div className="table-contend">
                     <h3 className="sub-title-page">Estudiantes</h3>
-                    <p className="contador">{filteredStudents.length} resultados</p>
+                    <p className="contador">{filteredStudents.length} de {students.length}</p>
                     {filteredStudents.length === 0 ? (
                         <p className="empty-message">No se encontraron estudiantes.</p>
                     ) : (
@@ -113,8 +105,7 @@ const Estudiantes = () => {
                             <thead>
                                 <tr>
                                     <th>N°</th>
-                                    <th>Apellido</th>
-                                    <th>Nombre</th>
+                                    <th>Apellidos y Nombres</th>
                                     <th>DNI</th>
                                     <th>Carrera</th>
                                     <th>Detalles</th>
@@ -124,8 +115,7 @@ const Estudiantes = () => {
                                 {filteredStudents.map((student, index) => (
                                     <tr key={index} onClick={() => setSelectedStudent(student)}>
                                         <td>{index + 1}</td>
-                                        <td>{student.apellidos}</td>
-                                        <td>{student.nombres}</td>
+                                        <td>{student.apellidos}, {student.nombres}</td>
                                         <td>{student.dni}</td>
                                         <td>{student.carrera ? student.carrera.nombre : '---'}</td>
                                         <td>

@@ -14,6 +14,8 @@ import Detalles from './Matriculas/Detalles/Detalles';
 import Notas from './Notas/Notas';
 import Estudiantes from './Estudiantes/Estudiantes';
 import Carreras from './Carreras/Carreras';
+import SelectCarrerEs from './Notas/SelecCarrerEs';
+import SubirNota from './Notas/SubirNota';
 
 const App = () => {
 
@@ -43,9 +45,11 @@ const App = () => {
                     <Route path="/admision-upload/:carrera" element={<SubirAdmision />} />
                     <Route path="/admision-export/:carrera" element={<ExportaPdf />} />
                     <Route path="/matricula/:dni/:id" element={<Detalles />} />
-                    <Route path="/notas" element={<Notas />} />
+                    <Route path="/notas/:carrer" element={<Notas />} />
                     <Route path="/estudiantes" element={<Estudiantes />} />
                     <Route path="/programas-studio" element={<Carreras />} />
+                    <Route path="/selectCaEs" element={<SelectCarrerEs />} /> 
+                    <Route path="/subirNota/:carrera/:student" element={<SubirNota />}/>
                 </Routes>
             </BrowserRouter>
         </div>

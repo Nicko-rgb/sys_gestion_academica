@@ -2,6 +2,7 @@ const AdminDefault = require('./AdminDefault')
 const InsertCarreras = require('./InserCarrera')
 const insertStudent = require('./insetStudent')
 const InsertPeriodo = require('./insertPerdiodo')
+const insertAsignatura = require('./insertAsignatura')
 // const InsertCursos = require('./InsertCurso')
 
 const inicalizaInsersion = async () => {
@@ -9,6 +10,7 @@ const inicalizaInsersion = async () => {
     await AdminDefault();
     await insertStudent();
     await InsertPeriodo();
+    await insertAsignatura();
     //......
 }
 

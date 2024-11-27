@@ -1,75 +1,30 @@
-/* Estilos generales para la página de Notas */
-.notas-container {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f7fa;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-}
 
-.notas-main {
-    flex: 1;
+.notas main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+}
+.notas .title-page {
+    font-size: 24px;
+    color: dodgerblue;
 }
 
-/* Header */
-.notas-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-    width: 100%;
-}
-
-.notas-header .volver {
-    font-size: 16px;
-    color: #007bff;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 10px;
-    transition: color 0.3s ease;
-}
-
-.notas-header .volver:hover {
-    color: #0056b3;
-    text-decoration: underline;
-}
-
-/* Títulos */
-.notas-title-container {
-    margin-top: 40px; /* Separación superior */
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.notas-title-page {
-    font-size: 28px;
-    font-weight: 600;
-    color: #333;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.notas-subtitle {
-    font-size: 18px;
-    color: #555;
-    margin-top: 10px;
-}
 
 /* Filtros */
-.notas-acciones {
+.notas .acciones {
     display: flex;
     gap: 15px;
     margin-bottom: 30px;
     justify-content: center;
-    width: 100%;
+    position: relative;
+    margin-top: 40px;
+}
+.notas .acciones .volver-box {
+    top: -35px;
+    left: 0;
 }
 
-.notas-select {
+.notas .notas-select {
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
@@ -80,13 +35,8 @@
     transition: border-color 0.3s ease;
 }
 
-.notas-select:focus {
-    border-color: #007bff;
-    outline: none;
-}
-
 /* Buscador */
-.notas-buscador-section input {
+.notas .acciones input {
     width: 100%;
     padding: 12px;
     border-radius: 8px;
@@ -108,50 +58,57 @@
     border-radius: 12px;
     padding: 30px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    margin-top: 40px;
-    overflow-x: auto;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.notas-table {
-    width: 100%;
-    border-collapse: collapse;
-    table-layout: fixed;
-}
 
-.notas-table th,
-.notas-table td {
-    padding: 15px;
+.subir-nota main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.subir-nota .datos {
+    margin-top: 30px;
+    position: relative;
+}
+.subir-nota .volver-box{
+    top: -35px;
+    left: 0;
+}
+.subir-nota form{
+    display: flex;
+    flex-direction: row;
+}
+.subir-nota form label{
     text-align: center;
-    border: 1px solid #ddd;
-    font-size: 16px;
-    color: #555;
 }
-
-.notas-table th {
-    background-color: #f7f7f7;
-    font-weight: 600;
-    color: #333;
+.subir-nota form input {
+    padding: 8px;
+    font-weight: bold;
+    text-align: center;
 }
-
-.notas-table tbody tr:nth-child(odd) {
-    background-color: #fafafa;
+.subir-nota .sub-title-page{
+    margin-top: 20px;
 }
-
-.notas-table tbody tr:hover {
-    background-color: #f1f1f1;
+.subir-nota .boxs {
+    max-width: 800px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
 }
-
-.notas-upload-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
+.subir-nota .boxs .box {
+    width: 200px;
+    height: 130px;
+    border: black solid 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-
-.notas-upload-button:hover {
-    background-color: #0056b3;
+.subir-nota .box p{
+    text-align: center;
 }
