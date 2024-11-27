@@ -40,6 +40,7 @@ const Panel = () => {
                         <p>NOTAS DE ESTUDIANTES</p>
                         <button>Acción</button>
                     </Link>
+                    
                 </div>
             </main>
             <NavPie />
