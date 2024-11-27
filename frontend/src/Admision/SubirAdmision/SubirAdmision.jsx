@@ -111,7 +111,8 @@ const SubirAdmision = () => {
                                     <td className='acciont'>
                                         <div>
                                             {postulante.resultado ? (
-                                                <PiPencilLineBold onClick={() => handleOpenForm(postulante)} className='ico ico-edit' />
+                                                // <PiPencilLineBold onClick={() => handleOpenForm(postulante)} className='ico ico-edit' />
+                                                <></>
                                             ) : (
                                                 <MdFileUpload onClick={() => handleOpenForm(postulante)} className='ico ico-subir' />
                                             )}

@@ -3,7 +3,7 @@ const Admins = require('./Admin');
 const Profesores = require('./Profesores');
 const Estudiantes = require('./Estudiantes');
 const Carreras = require('./carreras');
-const PeriodosAcademicos = require('./Periodos');
+const Periodos = require('./Periodos');
 const Asignaturas = require('./Asignaturas');
 const Postulantes = require('./Postulantes');
 const PostulanteResultado = require('./PostulanteResultado');
@@ -35,7 +35,7 @@ module.exports = {
     Profesores,
     Estudiantes,
     Carreras,
-    PeriodosAcademicos,
+    Periodos,
     Asignaturas,
     Postulantes,
     PostulanteResultado,

@@ -27,8 +27,7 @@ const Estudiantes = sequelize.define('Estudiantes', {
     },
     dni: {
         type: DataTypes.STRING(20),
-        allowNull: false,
-        unique: true
+        allowNull: false
     },
     fecha_nacimiento: {
         type: DataTypes.DATEONLY,

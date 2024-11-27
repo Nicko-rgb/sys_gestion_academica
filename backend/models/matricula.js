@@ -14,13 +14,9 @@ const Matriculas = sequelize.define('Matriculas', {
             key: 'id_estudiante'
         }
     },
-    id_asignatura: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'Asignaturas',
-            key: 'id_asignatura'
-        }
+    monto: {
+        type: DataTypes.STRING(20),
+        allowNull: false
     },
     periodo_academico: {
         type: DataTypes.STRING(50),
