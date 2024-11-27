@@ -10,6 +10,8 @@ import Admision from './Admision/Admision';
 import Matricula from './Matriculas/Matricula';
 import SubirAdmision from './Admision/SubirAdmision/SubirAdmision';
 import ExportaPdf from './Admision/Exporta/ExportaPdf';
+import Notas from './Notas/Notas';
+import Estudiantes from './Estudiantes/Estudiantes';
 
 const App = () => {
 
@@ -38,6 +40,9 @@ const App = () => {
                     <Route path="/matricula" element={<Matricula />} />
                     <Route path="/admision-upload/:carrera" element={<SubirAdmision />} />
                     <Route path="/admision-export/:carrera" element={<ExportaPdf />} />
+                    <Route path="/notas" element={<Notas />} />
+                    <Route path="/estudiantes" element={<Estudiantes />} />
+                    
                 </Routes>
             </BrowserRouter>
         </div>
