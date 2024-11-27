@@ -1,0 +1,157 @@
+/* Estilos generales para la página de Notas */
+.notas-container {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fa;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.notas-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* Header */
+.notas-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.notas-header .volver {
+    font-size: 16px;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px;
+    transition: color 0.3s ease;
+}
+
+.notas-header .volver:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* Títulos */
+.notas-title-container {
+    margin-top: 40px; /* Separación superior */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.notas-title-page {
+    font-size: 28px;
+    font-weight: 600;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.notas-subtitle {
+    font-size: 18px;
+    color: #555;
+    margin-top: 10px;
+}
+
+/* Filtros */
+.notas-acciones {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    justify-content: center;
+    width: 100%;
+}
+
+.notas-select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    min-width: 200px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.notas-select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Buscador */
+.notas-buscador-section input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.notas-buscador-section input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Tabla */
+.notas-table-container {
+    width: 100%;
+    max-width: 1200px;
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 40px;
+    overflow-x: auto;
+}
+
+.notas-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.notas-table th,
+.notas-table td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    color: #555;
+}
+
+.notas-table th {
+    background-color: #f7f7f7;
+    font-weight: 600;
+    color: #333;
+}
+
+.notas-table tbody tr:nth-child(odd) {
+    background-color: #fafafa;
+}
+
+.notas-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.notas-upload-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.notas-upload-button:hover {
+    background-color: #0056b3;
+}

@@ -60,7 +60,7 @@ const Notas = () => {
             ? new Date(student.createdAt).getFullYear() === selectedYear
             : true;
         const carreraMatch = selectedCarrera
-            ? student.carrera?.nombre?.toLowerCase().includes(selectedCarrera.toLowerCase())
+            ? student.carrera?.nombre?.toLowerCase() === selectedCarrera.toLowerCase()
             : true;
         const searchMatch = searchTerm
             ? student.nombres.toLowerCase().includes(searchTerm) ||
@@ -89,21 +89,31 @@ const Notas = () => {
         }
     };
 
-    return (
-        <div className="principal notas">
-            <NavTop />
-            <main>
-                {/* Contenedor para Volver y Home */}
-                <div className="acciones-top">
-                    <Volver />
-                </div>
-                
-                <h3 className="title-page">NOTAS DE ESTUDIANTES</h3>
+    const handleUploadNota = (studentId) => {
+        console.log(`Subiendo nota para el estudiante con ID: ${studentId}`);
+    };
 
-                {/* Filtros de carrera y año */}
-                <div className="acciones">
+    return (
+        <div className="notas-container">
+            <NavTop />
+            <div className="notas-header">
+                {/* Botón Home */}
+                <a href="/" className="volver">
+                    Home
+                </a>
+                {/* Botón Volver */}
+                <Volver />
+            </div>
+
+            <main className="notas-main">
+                <div className="notas-title-container">
+                    <h3 className="notas-title-page">NOTAS DE ESTUDIANTES</h3>
+                    <p className="notas-subtitle">Consulta y gestión de notas</p>
+                </div>
+
+                <div className="notas-acciones">
                     <select
-                        className="carre-s"
+                        className="notas-select"
                         value={selectedCarrera}
                         onChange={(e) => setSelectedCarrera(e.target.value)}
                     >
@@ -115,6 +125,7 @@ const Notas = () => {
                         ))}
                     </select>
                     <select
+                        className="notas-select"
                         value={selectedYear}
                         onChange={(e) => setSelectedYear(Number(e.target.value))}
                     >
@@ -127,26 +138,29 @@ const Notas = () => {
                     </select>
                 </div>
 
-                {/* Buscador ahora debajo de los filtros */}
-                <div className="buscador-section">
+                <div className="notas-buscador-section">
                     <Buscardor onSearchChange={handleSearchChange} />
                 </div>
 
-                <div className="table-contend">
-                    <h3 className="sub-title-page">NOTAS REGISTRADAS - {selectedYear}</h3>
-                    <p className="contador">{filteredNotas.length} de {students.length}</p>
+                <div className="notas-table-container">
+                    <h3 className="notas-sub-title-page">NOTAS REGISTRADAS - {selectedYear}</h3>
+                    <p className="notas-contador">
+                        {filteredNotas.length} de {students.length}
+                    </p>
                     {loading ? (
-                        <p className="loading-message">Cargando datos...</p>
+                        <p className="notas-loading-message">Cargando datos...</p>
                     ) : error ? (
-                        <p className="error-message">{error}</p>
+                        <p className="notas-error-message">{error}</p>
                     ) : filteredNotas.length === 0 ? (
                         searchTerm ? (
-                            <p className="no-results-message">No se encontraron resultados para "{searchTerm}"</p>
+                            <p className="notas-no-results-message">
+                                No se encontraron resultados para "{searchTerm}"
+                            </p>
                         ) : (
-                            <p className="empty-message">No hay notas registradas aún.</p>
+                            <p className="notas-empty-message">No hay notas registradas aún.</p>
                         )
                     ) : (
-                        <table>
+                        <table className="notas-table">
                             <thead>
                                 <tr>
                                     <th>N°</th>
@@ -157,6 +171,7 @@ const Notas = () => {
                                     <th>Curso</th>
                                     <th>Nota</th>
                                     <th>Año</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -170,6 +185,11 @@ const Notas = () => {
                                         <td>{student.curso}</td>
                                         <td>{student.nota}</td>
                                         <td>{new Date(student.createdAt).getFullYear()}</td>
+                                        <td>
+                                            <button onClick={() => handleUploadNota(student.id)}>
+                                                Subir Nota
+                                            </button>
+                                        </td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -177,12 +197,12 @@ const Notas = () => {
                     )}
                 </div>
 
-                {/* Paginación */}
                 <BtnPagina
                     back={currentPage > 1 ? handlePrevPage : null}
                     next={currentPage < totalPages ? handleNextPage : null}
                 />
             </main>
+
             <NavBottom />
         </div>
     );
