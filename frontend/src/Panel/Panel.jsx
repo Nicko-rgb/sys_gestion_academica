@@ -20,9 +20,9 @@ const Panel = () => {
                         <p>ESTUDIANTES</p>
                         <button>Acción</button>
                     </Link>
-                    <Link className='aaa'>
+                    <Link className='aaa' to='/programas-studio'>
                         <IoMdOpen  className='ico'/>
-                        <p>CARRERAS</p>
+                        <p>PROGRAMAS DE ESTUDIOS</p>
                         <button>Acción</button>
                     </Link>
                     <Link className='aaa' to='/matricula'>

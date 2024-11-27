@@ -153,45 +153,51 @@ const Matricula = () => {
                         <p className="error-message">{error}</p>
                     ) : filteredPostulantes.length === 0 ? (
                         <>
-                        {searchTerm ? (
-                            <p className="no-results-message">No se encontraron resultados para "{searchTerm}"</p>
-                        ) : (
-                            <p className="empty-message">No hay estudiantes registrados aún.</p>
-                        )}
+                            {searchTerm ? (
+                                <p className="no-results-message">No se encontraron resultados para "{searchTerm}"</p>
+                            ) : (
+                                <p className="empty-message">No hay estudiantes registrados aún.</p>
+                            )}
                         </>
                     ) : (
                         <table>
                             <thead>
                                 <tr>
                                     <th>N°</th>
-                                    <th>Apellido</th>
-                                    <th>Nombre</th>
+                                    <th>Apellidos y Nombres</th>
                                     <th>DNI</th>
                                     <th>Correo</th>
                                     <th>Teléfono</th>
                                     <th>Carrera Profesional</th>
-                                    <th>Condicíon</th>
+                                    <th>Ciclo</th>
                                     <th>Acción</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {paginatedPostulantes.map((student, index) => (
-                                    <tr key={index}>
-                                        <td>{index + 1}</td>
-                                        <td>{student.apellidos}</td>
-                                        <td>{student.nombres}</td>
-                                        <td>{student.dni}</td>
-                                        <td className='email'>{student.email}</td>
-                                        <td>{student.telefono}</td>
-                                        <td>{student.carrera ? student.carrera.nombre : '---'}</td>
-                                        <td>{student.condicion}</td>
-                                        <td className='acc-t'>
-                                            <div>
-                                                <button onClick={() => irMatricula(student)}><LuPencilLine className='ico' />VER MATRICULAS</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                ))}
+                                {paginatedPostulantes.map((student, index) => {
+                                    const ultimoMatricula = student.matricula && student.matricula.length > 0
+                                        ? student.matricula[student.matricula.length - 1]
+                                        : null;
+
+                                    return ( // Asegúrate de retornar el JSX
+                                        <tr key={index}>
+                                            <td>{index + 1}</td>
+                                            <td>{student.apellidos}, {student.nombres}</td>
+                                            <td>{student.dni}</td>
+                                            <td className='email'>{student.email}</td>
+                                            <td>{student.telefono}</td>
+                                            <td>{student.carrera ? student.carrera.nombre : '---'}</td>
+                                            <td>{ultimoMatricula ? ultimoMatricula.nombre_periodo : 'No Matriculado'}</td>
+                                            <td className='acc-t'>
+                                                <div>
+                                                    <button onClick={() => irMatricula(student)}>
+                                                        <LuPencilLine className='ico' />VER MATRICULAS
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
                             </tbody>
                         </table>
                     )}

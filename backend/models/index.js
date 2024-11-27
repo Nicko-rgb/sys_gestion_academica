@@ -8,6 +8,7 @@ const Asignaturas = require('./Asignaturas');
 const Postulantes = require('./Postulantes');
 const PostulanteResultado = require('./PostulanteResultado');
 const PagoPostulante = require('./PagoPostulante')
+const Matricula = require('./matricula')
 
 // Define relaciones de Postulante a Resultados de Postulante
 Postulantes.hasOne(PostulanteResultado, { foreignKey: 'id_postulante', as: 'resultado' });
@@ -28,6 +29,9 @@ Estudiantes.hasOne(PostulanteResultado, { foreignKey: 'id_estudiante', as: 'resu
 Estudiantes.belongsTo(Carreras, { foreignKey: 'id_carrera', as: 'carrera' });
 Carreras.hasMany(Estudiantes, { foreignKey: 'id_carrera', as: 'estudiantes' });
 
+//Relacion de Estudiantes a Matriculas, de uno a muchos
+Estudiantes.hasMany(Matricula, { foreignKey: 'id_estudiante', as: 'matricula'})
+Matricula.belongsTo(Estudiantes, { foreignKey: 'id_estudiante', as: 'estudiante'})
 
 // Exportar todos los modelos
 module.exports = {
@@ -39,5 +43,6 @@ module.exports = {
     Asignaturas,
     Postulantes,
     PostulanteResultado,
-    PagoPostulante
+    PagoPostulante,
+    Matricula
 };

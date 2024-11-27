@@ -13,6 +13,7 @@ import ExportaPdf from './Admision/Exporta/ExportaPdf';
 import Detalles from './Matriculas/Detalles/Detalles';
 import Notas from './Notas/Notas';
 import Estudiantes from './Estudiantes/Estudiantes';
+import Carreras from './Carreras/Carreras';
 
 const App = () => {
 
@@ -44,6 +45,7 @@ const App = () => {
                     <Route path="/matricula/:dni/:id" element={<Detalles />} />
                     <Route path="/notas" element={<Notas />} />
                     <Route path="/estudiantes" element={<Estudiantes />} />
+                    <Route path="/programas-studio" element={<Carreras />} />
                 </Routes>
             </BrowserRouter>
         </div>

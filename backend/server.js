@@ -15,7 +15,8 @@ const {
     Asignaturas,
     Postulantes,
     PostulanteResultado,
-    PagoPostulante
+    PagoPostulante,
+    Matricula
 } = require('./models/index'); // Asegúrate de que la ruta sea correcta
 
 
@@ -302,16 +303,63 @@ app.post('/api/register/admision-puntos', async (req, res) => {
 app.get('/api/obtener-estudiantes', async (req, res) => {
     try {
         const estudiantes = await Estudiantes.findAll({
-            include: {
-                model: Carreras,
-                as: 'carrera',
-            }
+            include: [
+                {
+                    model: Carreras,
+                    as: 'carrera',
+                },
+                {
+                    model: Matricula,
+                    as: 'matricula',
+                },
+                {
+                    model: Postulantes,
+                    as: 'postulante',
+                }
+            ]
         });
         res.json(estudiantes);
     } catch (error) {
         console.error('Error al obtener estudiantes:', error);
+        res.status(500).json({ error: 'Error al obtener estudiantes' });
     }
-})
+});
+
+
+//Ruta para registrar  las Matriculas
+app.post('/api/registrar-matricula', async (req, res) => {
+    const { id_estudiante, monto, nombre_periodo } = req.body;
+
+    try {
+        // Verifica si ya existe una matrícula con el mismo id_estudiante y nombre_periodo
+        const matriculaExistente = await Matricula.findOne({
+            where: {
+                id_estudiante,
+                nombre_periodo,
+            },
+        });
+
+        if (matriculaExistente) {
+            return res.status(400).json({
+                error: 'Ya existe una matrícula para este estudiante en el período indicado.',
+            });
+        }
+
+        // Crea una nueva matrícula si no existe
+        const nuevaMatricula = await Matricula.create({
+            id_estudiante,
+            monto,
+            nombre_periodo,
+            fecha_matricula: new Date().toISOString().split('T')[0], // Fecha actual
+        });
+
+        res.status(201).json(nuevaMatricula);
+    } catch (error) {
+        console.error('Error al registrar la matrícula:', error);
+        res.status(500).json({ error: 'Error al registrar la matrícula' });
+    }
+});
+
 
 // Ruta para registrar un nuevo profesor (POST)
 app.post('/api/register-profesor', async (req, res) => {

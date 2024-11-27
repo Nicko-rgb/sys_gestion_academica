@@ -52,3 +52,18 @@
 .matricula .acc-t .ico {
     font-size: 18px;
 }
+.matricula table .indica {
+    padding: 0 3px;
+}
+.matricula table .indica .div {
+    display: flex;
+    gap: 6px;
+    padding: 0;
+}
+
+.matricula table .indica .div div {
+    background-color: gray;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+}
