@@ -1,9 +1,9 @@
 // db.js
 const { Sequelize } = require('sequelize');
-require('dotenv').config(); // Cargar las variables de entorno
 
-// Obtiene la URL de conexión desde las variables de entorno
-const db = new Sequelize(process.env.DATABASE_URL, {
+// Configura la conexión a la base de datos PostgreSQL
+const db = new Sequelize('gestion_academica', 'postgres', '159357', {
+    host: 'localhost',
     dialect: 'postgres',
     logging: false
 });
@@ -14,12 +14,7 @@ db.authenticate()
         console.log('Conexión a la base de datos establecida correctamente.');
     })
     .catch(err => {
-        console.error('Error al conectar a la base de datos:', err.message);
-        console.error(err);
+        console.error('No se pudo conectar a la base de datos:', err);
     });
-
-process.on('unhandledRejection', (reason, promise) => {
-    console.error('Unhandled Rejection at:', promise, 'reason:', reason);
-});
 
 module.exports = db;
