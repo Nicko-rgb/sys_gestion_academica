@@ -8,6 +8,8 @@ import { MdPersonAddAlt1 } from "react-icons/md";
 import Volver from '../Navegador/Volver';
 import BtnPagina from '../Complementos/BtnPagina';
 import FormPostulante from './FormMatricula/FormPostu';
+import { LuPencilLine } from "react-icons/lu";
+import { useNavigate } from 'react-router-dom';
 
 const Matricula = () => {
     const [formMatricula, setFormMatricula] = useState(false);
@@ -20,6 +22,7 @@ const Matricula = () => {
     const [carreras, setCarreras] = useState([]); // Carrera array (definir o cargar desde API)
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(10);
+    const [selectStudent, setSelectStudent] = useState(null)
 
     const fetchPostulantes = async () => {
         setLoading(true);
@@ -98,6 +101,14 @@ const Matricula = () => {
         }
     };
 
+    const navigate = useNavigate()
+
+    const irMatricula = (student) => {
+        setSelectStudent(student);
+        navigate(`/matricula/${student.dni}/${student.id_estudiante}`, { state: { student } });
+    }
+
+
     return (
         <div className="principal matricula">
             <NavTop />
@@ -160,7 +171,7 @@ const Matricula = () => {
                                     <th>Teléfono</th>
                                     <th>Carrera Profesional</th>
                                     <th>Condicíon</th>
-                                    <th>Matrícula</th>
+                                    <th>Acción</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -176,7 +187,7 @@ const Matricula = () => {
                                         <td>{student.condicion}</td>
                                         <td className='acc-t'>
                                             <div>
-                                                <button>Ver Detalle</button>
+                                                <button onClick={() => irMatricula(student)}><LuPencilLine className='ico' />VER MATRICULAS</button>
                                             </div>
                                         </td>
                                     </tr>

@@ -11,7 +11,7 @@ const {
     profesores,
     Estudiantes,
     Carreras,
-    Periodos_Academicos,
+    Periodos,
     Asignaturas,
     Postulantes,
     PostulanteResultado,
@@ -205,8 +205,6 @@ app.delete('/api/delete-postulante/:id', async (req, res) => {
         return res.status(500).json({ message: 'Error al eliminar el postulante', error: error.message });
     }
 });
-
-
 
 
 //ruta para obtner todos los postulante 
@@ -467,7 +465,7 @@ app.post('/api/register-periodo', async (req, res) => {
     const { nombre, fecha_inicio, fecha_fin, estado } = req.body;
 
     try {
-        const nuevoPeriodo = await Periodos_Academicos.create({ nombre, fecha_inicio, fecha_fin, estado });
+        const nuevoPeriodo = await Periodos.create({ nombre, fecha_inicio, fecha_fin, estado });
         res.status(201).json({ message: 'Periodo académico creado correctamente', periodo: nuevoPeriodo });
     } catch (error) {
         console.error('Error al crear el periodo académico:', error);
@@ -478,7 +476,7 @@ app.post('/api/register-periodo', async (req, res) => {
 // GET: Obtener todos los periodos académicos
 app.get('/api/periodos-all', async (req, res) => {
     try {
-        const periodos = await Periodos_Academicos.findAll();
+        const periodos = await Periodos.findAll();
         res.status(200).json(periodos);
     } catch (error) {
         console.error('Error al obtener los periodos académicos:', error);
@@ -492,7 +490,7 @@ app.put('/api/periodos-update/:id', async (req, res) => {
     const { nombre, fecha_inicio, fecha_fin, estado } = req.body;
 
     try {
-        const [updated] = await Periodos_Academicos.update(
+        const [updated] = await Periodos.update(
             { nombre, fecha_inicio, fecha_fin, estado },
             { where: { id_periodo: id } }
         );

@@ -9,7 +9,7 @@ const PagoPostulante = sequelize.define('PagoPostulante', {
         autoIncrement: true
     },
     id_postulante : {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         references: {
             model: Postulantes,
             key: 'id_postulante',
