@@ -1,0 +1,166 @@
+/* General styles for the Estudiantes component */
+.principal.estudiantes {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Title of the page */
+.title-page {
+    font-size: 1.8rem;
+    text-align: center;
+    margin: 20px 0;
+    color: #0056b3;
+    text-transform: uppercase;
+}
+
+/* Action buttons and search bar */
+.acciones {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    margin-bottom: 20px;
+    margin-top: 30px; /* Ajusta el valor para mover el buscador más abajo */
+}
+
+.acciones button {
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.acciones button:hover {
+    background-color: #003d80;
+}
+
+.acciones select,
+.acciones input {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Table styles */
+.table-contend {
+    margin: 0 auto;
+    width: 90%;
+    max-width: 1200px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.table-contend table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-contend th,
+.table-contend td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.table-contend th {
+    background-color: #0056b3;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.table-contend tbody tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+.empty-message {
+    text-align: center;
+    color: #888;
+    font-size: 1.2rem;
+    margin: 20px 0;
+}
+
+/* Student registration form */
+.student-form {
+    width: 90%;
+    max-width: 500px;
+    margin: 20px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.student-form h3 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    text-align: center;
+    color: #0056b3;
+}
+
+.student-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.student-form input,
+.student-form select {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.student-form button {
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.student-form button:hover {
+    background-color: #003d80;
+}
+
+.student-form button[type="button"] {
+    background-color: #bbb;
+    margin-top: -10px;
+}
+
+.student-form button[type="button"]:hover {
+    background-color: #999;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .acciones {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .table-contend {
+        width: 100%;
+    }
+
+    .student-form {
+        width: 100%;
+    }
+}
