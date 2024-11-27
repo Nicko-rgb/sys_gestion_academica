@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize'); // Importa DataTypes de Sequelize
 const sequelize = require('../db'); 
+const Estudiantes = require('./Estudiantes')
 
 const Notas = sequelize.define('Notas', {
     id_nota: {
@@ -11,34 +12,34 @@ const Notas = sequelize.define('Notas', {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'Estudiantes',
+            model: Estudiantes,
             key: 'id_estudiante'
         }
     },
-    id_asignatura: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'Asignaturas',
-            key: 'id_asignatura'
-        }
-    },
-    nota: {
-        type: DataTypes.FLOAT,
+    curso: {
+        type: DataTypes.STRING(100),
         allowNull: false
     },
-    periodo_academico: {
-        type: DataTypes.STRING(50),
+    notas1: {
+        type: DataTypes.STRING(100),
         allowNull: false
     },
-    fecha_emision: {
+    notas2: {
+        type: DataTypes.STRING(100),
+        allowNull: false
+    },
+    notas3: {
+        type: DataTypes.STRING(100),
+        allowNull: false
+    },
+    promedio: {
+        type: DataTypes.STRING(100),
+        allowNull: false
+    },
+    fecha: {
         type: DataTypes.DATEONLY,
         allowNull: false
     },
-    comentarios: {
-        type: DataTypes.STRING(255),
-        allowNull: true
-    }
 });
 
 module.exports = Notas;

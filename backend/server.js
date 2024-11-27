@@ -16,7 +16,8 @@ const {
     Postulantes,
     PostulanteResultado,
     PagoPostulante,
-    Matricula
+    Matricula,
+    Notas
 } = require('./models/index'); // Asegúrate de que la ruta sea correcta
 
 
@@ -37,7 +38,7 @@ db.sync({ alter: true }) // O { force: true } si quieres reiniciar la tabla
         console.error('Error al sincronizar los modelos:', err);
     });
 
-    
+
 //ruta para registrar un nuevo admin
 app.post('/api/register-admin', async (req, res) => {
     const { dni, nombres, apellidos, email, telefono, rol, password } = req.body;
@@ -146,7 +147,7 @@ app.post('/api/register-postulante', async (req, res) => {
         // Respuesta con datos del postulante creado
         res.status(201).json({
             message: 'Postulante creado correctamente',
-            postulante: { id: postulante.id_postulante, nombres: postulante.nombres, apellidos: postulante.apellidos, dni: postulante.dni}
+            postulante: { id: postulante.id_postulante, nombres: postulante.nombres, apellidos: postulante.apellidos, dni: postulante.dni }
         });
     } catch (error) {
         console.error('Error al crear el postulante:', error);
@@ -253,7 +254,7 @@ app.get('/api/postulante/:id', async (req, res) => {
 
 // Obtener postulantes por nombre de carrera
 app.get('/api/postulantes-carrera/:carrera', async (req, res) => {
-    const carrera = req.params.carrera; 
+    const carrera = req.params.carrera;
     try {
         const postulantes = await Postulantes.findAll({
             where: {
@@ -315,6 +316,10 @@ app.get('/api/obtener-estudiantes', async (req, res) => {
                 {
                     model: Postulantes,
                     as: 'postulante',
+                },
+                {
+                    model: Notas,
+                    as: 'notas',
                 }
             ]
         });
@@ -700,12 +705,26 @@ app.get('/api/notas/:id_estudiante', async (req, res) => {
 
 // POST: Crear nueva nota
 app.post('/api/notas', async (req, res) => {
-    const { id_estudiante, id_asignatura, nota, periodo_academico, fecha_emision, comentarios } = req.body;
+    const { id_estudiante, curso, notas1, notas2, notas3, promedio, fecha } = req.body;
+
     try {
-        await Notas.create({ id_estudiante, id_asignatura, nota, periodo_academico, fecha_emision, comentarios });
-        res.json({ message: 'Nota creada correctamente' });
+        const nuevaNota = await Notas.create({
+            id_estudiante,
+            curso,
+            notas1,
+            notas2,
+            notas3,
+            promedio,
+            fecha,
+        });
+
+        res.status(201).json({
+            message: 'Nota registrada exitosamente',
+            data: nuevaNota,
+        });
     } catch (error) {
-        res.status(500).json({ error: 'Error al crear nota.' });
+        console.error(error);
+        res.status(500).json({ message: 'Error al registrar la nota' });
     }
 });
 
